@@ -1,0 +1,6 @@
+[submodule "external/nfluidsynth"]
+	path = external/nfluidsynth
+	url = https://github.com/atsushieno/nfluidsynth.git
+[submodule "external/android-fluidsynth"]
+	path = external/android-fluidsynth
+	url = https://github.com/atsushieno/android-fluidsynth.git

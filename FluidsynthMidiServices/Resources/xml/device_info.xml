@@ -1,0 +1,6 @@
+﻿<devices>
+    <device manufacturer="Xamarin" product="FluidsynthSample">
+        <input-port name="input" />
+        <output-port name="output" />
+    </device>
+</devices>

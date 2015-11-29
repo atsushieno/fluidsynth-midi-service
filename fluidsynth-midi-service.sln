@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluidsynthMidiServices", "FluidsynthMidiServices\FluidsynthMidiServices.csproj", "{F317962A-5C43-4A98-8982-0AA1DF5DC2FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFluidsynth.Android", "NFluidsynth.Android\NFluidsynth.Android.csproj", "{83B7266D-75D2-481F-B082-0FF8E7E2EC72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F317962A-5C43-4A98-8982-0AA1DF5DC2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F317962A-5C43-4A98-8982-0AA1DF5DC2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F317962A-5C43-4A98-8982-0AA1DF5DC2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F317962A-5C43-4A98-8982-0AA1DF5DC2FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83B7266D-75D2-481F-B082-0FF8E7E2EC72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83B7266D-75D2-481F-B082-0FF8E7E2EC72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83B7266D-75D2-481F-B082-0FF8E7E2EC72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83B7266D-75D2-481F-B082-0FF8E7E2EC72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
