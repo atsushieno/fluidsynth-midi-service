@@ -6,7 +6,7 @@ using Android.Content;
 
 namespace FluidsynthMidiServices
 {
-	[Service (Label = "Fluidsynth MIDI Device Service")]
+	[Service (Label = "Fluidsynth MIDI Device Service", Permission = Android.Manifest.Permission.BindMidiDeviceService)]
 	[IntentFilter (new string [] { MidiDeviceService.ServiceInterface })]
 	[MetaData (MidiDeviceService.ServiceInterface, Resource = "@xml/device_info")]
 	public class FluidsynthMidiDeviceService : MidiDeviceService
