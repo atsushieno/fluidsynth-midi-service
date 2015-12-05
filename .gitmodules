@@ -4,3 +4,6 @@
 [submodule "external/android-fluidsynth"]
 	path = external/android-fluidsynth
 	url = https://github.com/atsushieno/android-fluidsynth.git
+[submodule "external/managed-midi"]
+	path = external/managed-midi
+	url = https://github.com/atsushieno/managed-midi.git

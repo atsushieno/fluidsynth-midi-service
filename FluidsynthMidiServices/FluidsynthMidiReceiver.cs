@@ -1,3 +1,4 @@
+#define MIDI_MANAGER
 using System;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,8 @@ using Android.Content;
 using Java.Interop;
 using Android.Media;
 using Android.Util;
+using NFluidsynth.MidiManager;
+using Commons.Music.Midi;
 
 namespace FluidsynthMidiServices
 {
@@ -15,8 +18,12 @@ namespace FluidsynthMidiServices
 	{
 		public FluidsynthMidiReceiver (Context context)
 		{
+#if MIDI_MANAGER
+			access = new FluidsynthMidiAccess ();
+			access.ConfigureSettings = (settings) => {
+#else
 			var settings = new Settings ();
-
+#endif
 			//settings [ConfigurationKeys.AudioDriver].StringValue = "opensles";
 			
 			//settings [ConfigurationKeys.SynthParallelRender].IntValue = 0;
@@ -41,30 +48,45 @@ namespace FluidsynthMidiServices
 			var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 
 			// This adjusted number seems good for Android (at least on my kvm-based emulator on Ubuntu).
-			settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb * 2;
-
+			settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
+#if MIDI_MANAGER
+			};
+			access.Soundfonts.Add (default_soundfont);
+			output = access.OpenOutputAsync (access.Outputs.First ().Id).Result;
+#else
 			syn = new Synth (settings);
 			LoadDefaultSoundFontSpecial (context, syn);
 
 			adriver = new AudioDriver (syn.Settings, syn);
+#endif
 		}
 
+#if MIDI_MANAGER
+		FluidsynthMidiAccess access;
+		IMidiOutput output;
+#else
 		Synth syn;
 		AudioDriver adriver;
-
+#endif
+		
 		// FIXME: this is hack until we get proper sf loader.
+		const string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
+
 		void LoadDefaultSoundFontSpecial (Context context, Synth synth)
 		{
 			//Console.WriteLine ("!!!!!!!!!!!!!!! {0}", context.ApplicationInfo.DataDir);
-			synth.LoadSoundFont ("/sdcard/tmp/FluidR3_GM.sf2", true);
+			synth.LoadSoundFont (default_soundfont, true);
 		}
 
 		protected override void Dispose (bool disposing)
 		{
+#if MIDI_MANAGER
+#else
 			if (disposing) {
 				adriver.Dispose ();
 				syn.Dispose ();
 			}
+#endif
 			base.Dispose (disposing);
 		}
 
@@ -83,6 +105,9 @@ namespace FluidsynthMidiServices
 		
 		void DoSend (byte[] msg, int offset, int count, long timestamp)
 		{
+#if MIDI_MANAGER
+			output.SendAsync (msg, offset, count, timestamp);
+#else
 			// FIXME: consider timestamp.
 
 			int ch = msg [offset] & 0x0F;
@@ -115,6 +140,7 @@ namespace FluidsynthMidiServices
 				syn.Sysex (new ArraySegment<byte> (msg, offset, count).ToArray (), null);
 				break;
 			}
+#endif
 		}
 	}
 }

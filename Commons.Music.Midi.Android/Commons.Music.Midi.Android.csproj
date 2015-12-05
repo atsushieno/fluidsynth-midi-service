@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C6AF32A-3692-43B3-A907-9395564DB067}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Commons.Music.Midi.Android</RootNamespace>
+    <AssemblyName>Commons.Music.Midi.Android</AssemblyName>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\external\managed-midi\lib\base\MidiAccessManager.cs">
+      <Link>lib\base\MidiAccessManager.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\base\MidiMachine.cs">
+      <Link>lib\base\MidiMachine.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\base\MidiPlayer.cs">
+      <Link>lib\base\MidiPlayer.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\base\MidiTimeManager.cs">
+      <Link>lib\base\MidiTimeManager.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\base\SMF.cs">
+      <Link>lib\base\SMF.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\module-database\MidiModuleDatabase.cs">
+      <Link>lib\module-database\MidiModuleDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiAccess.cs">
+      <Link>lib\portmidi\PortMidiAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiPlayer.cs">
+      <Link>lib\portmidi\PortMidiPlayer.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiSharp.cs">
+      <Link>lib\portmidi\PortMidiSharp.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiAccess.cs">
+      <Link>lib\rtmidi\RtMidiAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiPlayer.cs">
+      <Link>lib\rtmidi\RtMidiPlayer.cs</Link>
+    </Compile>
+    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiSharp.cs">
+      <Link>lib\rtmidi\RtMidiSharp.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\midi-module-catalog.txt">
+      <LogicalName>lib\module-database\data\midi-module-catalog.txt</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\ms_gs_wavetable_synth.midimod">
+      <LogicalName>lib\module-database\data\ms_gs_wavetable_synth.midimod</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\roland_sc-88.midimod">
+      <LogicalName>lib\module-database\data\roland_sc-88.midimod</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\roland_sc-8820.midimod">
+      <LogicalName>lib\module-database\data\roland_sc-8820.midimod</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\roland_sc-88pro.midimod">
+      <LogicalName>lib\module-database\data\roland_sc-88pro.midimod</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\yamaha_motif-rack_es.midimod">
+      <LogicalName>lib\module-database\data\yamaha_motif-rack_es.midimod</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>

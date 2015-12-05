@@ -25,6 +25,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
+    <RunWithWarnings>true</RunWithWarnings>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <PlatformTarget>anycpu</PlatformTarget>
+    <WarningsNotAsErrors></WarningsNotAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -34,6 +40,20 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <IntermediateOutputPath>obj\Release</IntermediateOutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <ExternalConsole>false</ExternalConsole>
+    <Commandlineparameters></Commandlineparameters>
+    <RunWithWarnings>true</RunWithWarnings>
+    <MandroidExtraArgs></MandroidExtraArgs>
+    <AndroidLinkSkip></AndroidLinkSkip>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidStoreUncompressedFileExtensions></AndroidStoreUncompressedFileExtensions>
+    <MandroidI18n></MandroidI18n>
+    <AndroidSupportedAbis></AndroidSupportedAbis>
+    <EmbedAssembliesIntoApk></EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
