@@ -51,9 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FluidsynthMidiDeviceService.cs" />
     <Compile Include="FluidsynthMidiReceiver.cs" />
-    <Compile Include="..\external\nfluidsynth\NFluidsynth.MidiAccess\FluidsynthMidiAccess.cs">
-      <Link>FluidsynthMidiAccess.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
