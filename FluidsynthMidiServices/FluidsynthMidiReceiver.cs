@@ -5,6 +5,9 @@ using Android.Media.Midi;
 using Android.App;
 using NFluidsynth;
 using Android.Content;
+using Java.Interop;
+using Android.Media;
+using Android.Util;
 
 namespace FluidsynthMidiServices
 {
@@ -24,50 +27,35 @@ namespace FluidsynthMidiServices
 			// This is required.
 			settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
 
+			// Note that it is NOT audio sample rate but *synthesizing* sample rate.
+			// So it is wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome.
+			//
 			// 44.1KHz seems too much. 22.05 works on kvm-based emulator on Ubuntu.
 			//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 44100;
 			//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 22050;
 			settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
+			
+			//settings ["audio.opensles.buffering-sleep-rate"].DoubleValue = 0.85;
 
-			// This number seems good for Android (or my kvm-based emulator on Ubuntu).
-			settings [ConfigurationKeys.AudioPeriodSize].IntValue = 512; // like Windows
-			//settings [ConfigurationKeys.AudioPeriodSize].IntValue = 64;
+			var manager = context.GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
+			var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
+
+			// This adjusted number seems good for Android (at least on my kvm-based emulator on Ubuntu).
+			settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb * 2;
 
 			syn = new Synth (settings);
 			LoadDefaultSoundFontSpecial (context, syn);
 
-			/*
-			var files = args.Where (a => Synth.IsMidiFile (a));
-			if (files.Any ()) {
-				foreach (var arg in files) {
-					using (var player = new Player (syn)) {
-						using (var adriver = new AudioDriver (syn.Settings, syn)) {
-							player.Add (arg);
-							player.Play ();
-							player.Join ();
-						}
-					}
-				}
-			} else*/ {
-				//using (var adriver = new AudioDriver (syn.Settings, syn)) {
-				adriver = new AudioDriver (syn.Settings, syn);
-					//syn.NoteOn (0, 60, 100);
-					//syn.NoteOff (0, 60);
-				//}
-			}
+			adriver = new AudioDriver (syn.Settings, syn);
 		}
 
 		Synth syn;
 		AudioDriver adriver;
 
+		// FIXME: this is hack until we get proper sf loader.
 		void LoadDefaultSoundFontSpecial (Context context, Synth synth)
 		{
-			string appDir = context.ApplicationInfo.DataDir;
-			Console.WriteLine ("!!!!!!!!!!!!!!!" + appDir);
-			Console.WriteLine (string.Join ("\n",
-			                                Directory.GetFileSystemEntries (appDir, "*", SearchOption.AllDirectories)));
-			Console.WriteLine ("!!!!!!!!!!!!!!!" + appDir);
-			Console.WriteLine (string.Join ("\n", context.ApplicationContext.FileList ()));
+			//Console.WriteLine ("!!!!!!!!!!!!!!! {0}", context.ApplicationInfo.DataDir);
 			synth.LoadSoundFont ("/sdcard/tmp/FluidR3_GM.sf2", true);
 		}
 
@@ -85,9 +73,9 @@ namespace FluidsynthMidiServices
 			try {
 				DoSend (msg, offset, count, timestamp);
 			} catch (Exception) {
-				Android.Util.Log.Error ("FluidsynthMidiService", "Failed to send MIDI message: offset: {0}, count: {1}, timestamp: {2}, message length: {3}",
+				Log.Error ("FluidsynthMidiService", "Failed to send MIDI message: offset: {0}, count: {1}, timestamp: {2}, message length: {3}",
 					offset, count, timestamp, msg.Length);
-				Android.Util.Log.Error ("FluidsynthMidiService", "  message: {0}",
+				Log.Error ("FluidsynthMidiService", "  message: {0}",
 					msg.Skip (offset).Take (count).Select (b => b.ToString ("X") + ' '));
 				throw;
 			}
@@ -103,7 +91,6 @@ namespace FluidsynthMidiServices
 				syn.NoteOff (ch, msg [offset + 1]);
 				break;
 			case 0x90:
-				Console.WriteLine ("NoteOn: " + string.Join (":", msg.Skip (offset).Take (count).Select (b => string.Format ("{0:X02}", b))));
 				if (msg [offset + 2] == 0)
 					syn.NoteOff (ch, msg [offset + 1]);
 				else
