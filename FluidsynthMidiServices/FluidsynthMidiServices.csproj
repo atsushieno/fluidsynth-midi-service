@@ -29,6 +29,36 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
     <AndroidStoreUncompressedFileExtensions>sf2</AndroidStoreUncompressedFileExtensions>
+    <IntermediateOutputPath>obj\Debug</IntermediateOutputPath>
+    <ExternalConsole>false</ExternalConsole>
+    <Commandlineparameters></Commandlineparameters>
+    <RunWithWarnings>true</RunWithWarnings>
+    <MandroidExtraArgs></MandroidExtraArgs>
+    <AndroidLinkSkip></AndroidLinkSkip>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <BundleAssemblies>false</BundleAssemblies>
+    <MandroidI18n></MandroidI18n>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <EmbedAssembliesIntoApk></EmbedAssembliesIntoApk>
+    <JavaMaximumHeapSize></JavaMaximumHeapSize>
+    <JavaOptions></JavaOptions>
+    <AndroidKeyStore></AndroidKeyStore>
+    <AndroidSigningKeyStore></AndroidSigningKeyStore>
+    <AndroidSigningStorePass></AndroidSigningStorePass>
+    <AndroidSigningKeyAlias></AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass></AndroidSigningKeyPass>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <EnableProguard>false</EnableProguard>
+    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+    <AssemblyName>FluidsynthMidiServices</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <NoWarn></NoWarn>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -78,6 +108,10 @@
     <ProjectReference Include="..\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
       <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
       <Name>Commons.Music.Midi.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFluidsynth.MidiAccess\NFluidsynth.MidiAccess.csproj">
+      <Project>{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}</Project>
+      <Name>NFluidsynth.MidiAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
