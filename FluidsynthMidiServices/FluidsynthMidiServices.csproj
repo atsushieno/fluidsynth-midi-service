@@ -36,8 +36,6 @@
     <MandroidExtraArgs></MandroidExtraArgs>
     <AndroidLinkSkip></AndroidLinkSkip>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <BundleAssemblies>false</BundleAssemblies>
     <MandroidI18n></MandroidI18n>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
     <EmbedAssembliesIntoApk></EmbedAssembliesIntoApk>
@@ -48,14 +46,6 @@
     <AndroidSigningStorePass></AndroidSigningStorePass>
     <AndroidSigningKeyAlias></AndroidSigningKeyAlias>
     <AndroidSigningKeyPass></AndroidSigningKeyPass>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <EnableProguard>false</EnableProguard>
-    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <AssemblyName>FluidsynthMidiServices</AssemblyName>
-    <SignAssembly>false</SignAssembly>
-    <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
     <NoWarn></NoWarn>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
@@ -117,5 +107,8 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
     <AndroidEnvironment Include="AndroidEnvironment.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\rain.mid" />
   </ItemGroup>
 </Project>
