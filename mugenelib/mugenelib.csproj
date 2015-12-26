@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>mugenelib</RootNamespace>
+    <AssemblyName>mugenelib</AssemblyName>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="..\external\mugene\src\AssemblyInfo.cs">
+      <Link>mugene\src\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_compiler_main.cs">
+      <Link>mugene\src\mml_compiler_main.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_macro_expander.cs">
+      <Link>mugene\src\mml_macro_expander.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_parser.cs">
+      <Link>mugene\src\mml_parser.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_semantic_builder.cs">
+      <Link>mugene\src\mml_semantic_builder.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_smf_generator.cs">
+      <Link>mugene\src\mml_smf_generator.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_tokenizer.cs">
+      <Link>mugene\src\mml_tokenizer.cs</Link>
+    </Compile>
+    <Compile Include="..\external\mugene\src\mml_variable_processor.cs">
+      <Link>mugene\src\mml_variable_processor.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <AndroidAsset Include="..\external\mugene\mml\default-macro.mml">
+      <Link>mugene\mml\default-macro.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\drum-part.mml">
+      <Link>mugene\mml\drum-part.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\gs-sysex.mml">
+      <Link>mugene\mml\gs-sysex.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\nrpn-gs-xg.mml">
+      <Link>mugene\mml\nrpn-gs-xg.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\vsq-support.mml">
+      <Link>mugene\mml\vsq-support.mml</Link>
+    </AndroidAsset>
+    <None Include="..\external\mugene\src\mml_parser.jay">
+      <Link>mugene\src\mml_parser.jay</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
+      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
+      <Name>Commons.Music.Midi.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>

@@ -7,3 +7,6 @@
 [submodule "external/managed-midi"]
 	path = external/managed-midi
 	url = https://github.com/atsushieno/managed-midi.git
+[submodule "external/mugene"]
+	path = external/mugene
+	url = https://github.com/atsushieno/mugene.git

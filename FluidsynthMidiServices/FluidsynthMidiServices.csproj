@@ -76,6 +76,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <None Include="..\external\mugene\mml\vsq-support.mml">
+      <Link>Assets\vsq-support.mml</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -103,6 +106,10 @@
       <Project>{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}</Project>
       <Name>NFluidsynth.MidiAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\mugenelib\mugenelib.csproj">
+      <Project>{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}</Project>
+      <Name>mugenelib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
@@ -110,5 +117,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\rain.mid" />
+    <AndroidAsset Include="Assets\rain.mml" />
+    <AndroidAsset Include="..\external\mugene\mml\default-macro.mml">
+      <Link>Assets\default-macro.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\drum-part.mml">
+      <Link>Assets\drum-part.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\gs-sysex.mml">
+      <Link>Assets\gs-sysex.mml</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\mugene\mml\nrpn-gs-xg.mml">
+      <Link>Assets\nrpn-gs-xg.mml</Link>
+    </AndroidAsset>
   </ItemGroup>
 </Project>

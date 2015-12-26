@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons.Music.Midi.Android"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFluidsynth.MidiAccess", "NFluidsynth.MidiAccess\NFluidsynth.MidiAccess.csproj", "{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mugenelib", "mugenelib\mugenelib.csproj", "{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

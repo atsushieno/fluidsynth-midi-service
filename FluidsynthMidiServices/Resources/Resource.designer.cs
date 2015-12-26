@@ -26,6 +26,7 @@ namespace FluidsynthMidiServices
 		
 		public static void UpdateIdValues()
 		{
+			global::mugenelib.Resource.String.library_name = global::FluidsynthMidiServices.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -60,11 +61,17 @@ namespace FluidsynthMidiServices
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060002
+			public const int editText = 2131099650;
+			
 			// aapt resource value: 0x7f060000
-			public const int myButton = 2131099648;
+			public const int playChord = 2131099648;
+			
+			// aapt resource value: 0x7f060003
+			public const int playMML = 2131099651;
 			
 			// aapt resource value: 0x7f060001
-			public const int myButton2 = 2131099649;
+			public const int playSong = 2131099649;
 			
 			static Id()
 			{
@@ -95,11 +102,14 @@ namespace FluidsynthMidiServices
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f050002
+			public const int app_name = 2131034114;
+			
 			// aapt resource value: 0x7f050001
-			public const int app_name = 2131034113;
+			public const int hello = 2131034113;
 			
 			// aapt resource value: 0x7f050000
-			public const int hello = 2131034112;
+			public const int library_name = 2131034112;
 			
 			static String()
 			{

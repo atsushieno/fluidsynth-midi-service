@@ -12,60 +12,24 @@ using System.Linq;
 using Commons.Music.Midi;
 using NFluidsynth;
 using Android.Media;
+using Commons.Music.Midi.Mml;
+using System.IO;
+using NFluidsynth.MidiManager;
 
 namespace FluidsynthMidiServices
 {
 	[Activity (Label = "FluidsynthMidiServices", MainLauncher = true, Icon = "@drawable/icon")]
 	public class MainActivity : Activity
 	{
-		int count = 1;
-
+		FluidsynthMidiReceiver recv;
+		FluidsynthMidiAccess acc;
+		
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-
-			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
-			// Get our button from the layout resource,
-			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
-			FluidsynthMidiReceiver recv = null;
-			bool noteOn = false;
 			
-			button.Click += delegate {
-				var midiService = this.GetSystemService (MidiService).JavaCast<MidiManager> ();
-				var devs = midiService.GetDevices ();
-				Console.WriteLine ("!!!! {0} devices.", devs.Length);
-				
-				if (recv == null) {
-					recv = new FluidsynthMidiReceiver (this);
-					recv.OnSend (new Byte [] { 0xB0, 7, 127 }, 0, 3, 0);
-					recv.OnSend (new Byte [] { 0xB0, 11, 127 }, 0, 3, 0);
-					recv.OnSend (new Byte [] { 0xC0, 30 }, 0, 2, 0);
-				}
-				/*
-				foreach (var dev in devs) {
-					Console.WriteLine ("!!!! {0}, {1}, IN: {2}, Out: {3}, {4}, {5}", dev.Id, dev.Type, dev.InputPortCount, dev.OutputPortCount,
-							   dev.Properties.GetString (MidiDeviceInfo.PropertyName),
-							   dev.Properties.GetString (MidiDeviceInfo.PropertyProduct));
-
-					midiService.OpenDevice (dev, new Listener (), null);
-				}
-				*/
-				if (noteOn) {
-					recv.OnSend (new Byte [] { 0x80, 0x30, 0x78 }, 0, 3, 0);
-					recv.OnSend (new Byte [] { 0x80, 0x39, 0x78 }, 0, 3, 0);
-				} else {
-					recv.OnSend (new Byte [] { 0x90, 0x30, 0x60 }, 0, 3, 0);
-					recv.OnSend (new Byte [] { 0x90, 0x39, 0x60 }, 0, 3, 0);
-				}
-				noteOn = !noteOn;
-				button.Text = noteOn ? "playing" : "off";
-			};
-
-			
-			var acc = new NFluidsynth.MidiManager.FluidsynthMidiAccess ();
+			acc = new FluidsynthMidiAccess ();
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
 				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
@@ -79,18 +43,89 @@ namespace FluidsynthMidiServices
 			};
 			string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
 			acc.Soundfonts.Add (default_soundfont);
+			
+			var playChordButton = FindViewById<Button> (Resource.Id.playChord);
+			bool noteOn = false;
+			
+			playChordButton.Click += delegate {
+				//var midiService = this.GetSystemService (MidiService).JavaCast<MidiManager> ();
+				//var devs = midiService.GetDevices ();
+				
+				if (recv == null) {
+					recv = new FluidsynthMidiReceiver (this);
+					recv.OnSend (new Byte [] { 0xB0, 7, 127 }, 0, 3, 0);
+					recv.OnSend (new Byte [] { 0xB0, 11, 127 }, 0, 3, 0);
+					recv.OnSend (new Byte [] { 0xC0, 30 }, 0, 2, 0);
+				}
+				if (noteOn) {
+					recv.OnSend (new Byte [] { 0x80, 0x30, 0x78 }, 0, 3, 0);
+					recv.OnSend (new Byte [] { 0x80, 0x39, 0x78 }, 0, 3, 0);
+				} else {
+					recv.OnSend (new Byte [] { 0x90, 0x30, 0x60 }, 0, 3, 0);
+					recv.OnSend (new Byte [] { 0x90, 0x39, 0x60 }, 0, 3, 0);
+				}
+				noteOn = !noteOn;
+				playChordButton.Text = noteOn ? "playing" : "off";
+			};
+			
 			var music = SmfMusic.Read (this.Assets.Open ("rain.mid"));
-			var player = new MidiPlayer (music, acc);
-			Button button2 = FindViewById<Button> (Resource.Id.myButton2);
-			button2.Click += delegate {
-				if (player.State == PlayerState.Paused || player.State == PlayerState.Stopped) {
-					button2.Text = "playing";
+			MidiPlayer player = null;
+			var playSongButton = FindViewById<Button> (Resource.Id.playSong);
+			playSongButton.Click += delegate {
+				if (player == null || player.State == PlayerState.Paused || player.State == PlayerState.Stopped) {
+					if (player == null)
+						player = new MidiPlayer (music, acc);
+					playSongButton.Text = "playing";
 					player.PlayAsync ();
 				} else {
-					button2.Text = "paused";
+					playSongButton.Text = "paused";
 					player.PauseAsync ();
 				}
 			};
+			
+			var mmlEditText = FindViewById<EditText> (Resource.Id.editText);
+			mmlEditText.Text = new StreamReader (Assets.Open ("rain.mml")).ReadToEnd ();
+			var playMmlButton = FindViewById<Button> (Resource.Id.playMML);
+			MidiPlayer player2 = null;
+			playMmlButton.Click += delegate {
+				if (player2 == null || player2.State == PlayerState.Paused || player2.State == PlayerState.Stopped) {
+					var compiler = new MmlCompiler ();
+					compiler.Resolver = new AssetResolver (this);
+					var midiStream = new MemoryStream ();
+					var source = new MmlInputSource ("", new StringReader (mmlEditText.Text));
+					try {
+						compiler.Compile (false, Enumerable.Repeat (source, 1).ToArray (), null, midiStream, false);
+					} catch (MmlException ex) {
+						Android.Util.Log.Error ("FluidsynthPlayground", ex.ToString ());
+						Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();
+						return;
+					}
+					
+					var music2 = SmfMusic.Read (new MemoryStream (midiStream.ToArray ()));
+					player2 = new MidiPlayer (music2, acc);
+					
+					playMmlButton.Text = "playing";
+					player2.PlayAsync ();
+				} else {
+					playMmlButton.Text = "stopped";
+					player2.PauseAsync ();
+					player2.Dispose ();
+				}
+			};
+		}
+
+		class AssetResolver : StreamResolver
+		{
+			Context context;
+			public AssetResolver (Context context)
+			{
+				this.context = context;
+			}
+			
+			public override TextReader Resolve (string uri)
+			{
+				return new StreamReader (context.Assets.Open (uri));
+			}
 		}
 
 		class Listener : Java.Lang.Object, MidiManager.IOnDeviceOpenedListener

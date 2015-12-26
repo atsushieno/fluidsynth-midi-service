@@ -1,0 +1,63 @@
+#meta title		"Rain"
+#meta copyright	"(C)2000 composed and arranged by atsushieno"
+#meta text		"MML compiler mugene sample song #1"
+
+#macro	CH_INIT ch:number { CH$ch E127 B0 P64 M0 H0 RSD0 CSD0 DSD0 v80 l8 q16 }
+#macro	HON { H100 }
+#macro	HON { H100 }
+#macro	HOF { r%-1 H0 r%1 }
+#macro	MOD { M0,40,8,4 }
+
+
+//---- [[ 00 : Control ]]-------------------------------------
+0	t140 BEAT4,4  r1r1
+A	r1
+	[r1]4  BEAT3,4 r2. BEAT4,4
+	[r1]12
+B	[ [r1  BEAT7,8 r2.. BEAT4,4]2  BEAT3,4 r2. BEAT4,4 ]2
+	[r1]8
+C	[r1]16
+
+//---- [[ 01 : Bass ]]----------------------------------------
+1	CH_INIT1 @32 o2 V120 v80 l16 RSD40 CSD40 DSD10 q16  r1r1
+A	r1
+	b1b1b1b1>c4.<a4.
+ 	b1b1a1a1>d1d1
+	e1e1e1e1  a1b1
+B	@35 o2 ENV_DECAY84
+	[ [e2..  e2..er]2  a4.b4. ]2
+	[e2..er]3  B0,300,2+8,4.e1B0
+	g1 g1  c1 c1  e1 <b1>  f1 f1
+C	[e1 e1]4
+C	e1+1+1+1
+
+
+//---- [[ 02 : Acoustic Guitar ]]----------------------------
+2	CH_INIT2 @25 o4 V110 v80 l8 RSD40 CSD40 DSD10 q16  r1r1
+	ENV_RELEASE78
+A	HONef+ga>d<f+a>d<HOF
+	HON[<rf+b>f+bf+e<b>]4HOF  HONf+a>d<da>d<HOF
+	HON[<rf+b>f+bf+e<b>]4HOF  HON[<ra>da>d<af+d]2HOF
+	HON[<rb>f+b>ed<bf+  <rb>f+b>f+e<bf+]3HOF
+B	[ HON[<rb>f+b>ed<bf+  <rb>f+b>f+e<b]2  [da>d<]2 ]2
+	[ HON<rb>f+b>ed<bf+HOF  HON<rb>f+b>f+e<bf+HOF ]2
+C	[
+	HON<rb>f+b>ed<bf+HOF  HON<rb>f+b>f+e<bf+HOF
+	HON [rcf>cgfc<f]2 HOF
+	]2
+	[HON regb>ed<bg  regb>f+e<be HOF]4
+	HON e%8&g%6&b%4&>e%3&f+HOF
+
+//---- [[ 07 : Strings ]]----------------------------
+7	CH_INIT7 @50 o5 V50 v80 l8 RSD40 CSD60 DSD10 q16  r1r1
+A	r1
+	[r1]4  r2.
+	[r1]12
+B	[<b0>d0e0f+0g1+2..]2  <b0>d0e0f+0g0a0>e4.<<b0>d0e0f+0g0b0>e4.<
+	[e0f+0g0b0>d1+2..<]2  d0e0f+0g0a0>e0b4.<d0e0f+0g0b0>e0b4.<
+	[g0b0>d0e0f+1+1<]2
+C	[g0b0>d0e0f+1+1<  a0b0>c0e0f1,1+1a1<]2 // f1&a1
+	g0b0>d0e0g1+1<  g0b0>d0e0f+1+1<
+	// fadeout: make use of "spectra" operation (E_)
+	e0g0b0>d0e1+1<  E_127,0,1,1+1+1+1+1,8 e0f+0g0b0>d1+1<
+	e0g0b0>d0e1+1+1+1<

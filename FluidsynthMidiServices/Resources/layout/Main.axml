@@ -4,13 +4,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <Button
-        android:id="@+id/myButton"
+        android:id="@+id/playChord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:text="chord" />
     <Button
-        android:id="@+id/myButton2"
+        android:id="@+id/playSong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="play song" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:scrollbars="horizontal|vertical"
+        android:hint="edit MML here and tap play MML button" />
+    <Button
+        android:id="@+id/playMML"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="play MML" />
 </LinearLayout>
