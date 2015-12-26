@@ -35,20 +35,12 @@ namespace FluidsynthMidiServices
 			settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
 
 			// Note that it is NOT audio sample rate but *synthesizing* sample rate.
-			// So it is wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome.
-			//
-			// 44.1KHz seems too much. 22.05 works on kvm-based emulator on Ubuntu.
-			//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 44100;
-			//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 22050;
-			settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
-			
-			//settings ["audio.opensles.buffering-sleep-rate"].DoubleValue = 0.85;
-
+			// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
 			var manager = context.GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
 			var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
-
-			// This adjusted number seems good for Android (at least on my kvm-based emulator on Ubuntu).
 			settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
+			var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
+			settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
 #if MIDI_MANAGER
 			};
 			access.Soundfonts.Add (default_soundfont);

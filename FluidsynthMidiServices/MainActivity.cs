@@ -68,12 +68,14 @@ namespace FluidsynthMidiServices
 			var acc = new NFluidsynth.MidiManager.FluidsynthMidiAccess ();
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
-				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 44100;
+				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
+				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
 				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
+				var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
+				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
-				//settings [ConfigurationKeys.AudioPeriodSize].IntValue = 512; // override
-				settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
+				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
 			};
 			string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
 			acc.Soundfonts.Add (default_soundfont);
