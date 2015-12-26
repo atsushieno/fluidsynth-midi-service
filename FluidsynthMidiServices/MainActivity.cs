@@ -68,7 +68,7 @@ namespace FluidsynthMidiServices
 			var acc = new NFluidsynth.MidiManager.FluidsynthMidiAccess ();
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
-				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
+				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 44100;
 				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
