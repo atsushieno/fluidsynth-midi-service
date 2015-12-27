@@ -30,6 +30,10 @@ namespace FluidsynthMidiServices
 			SetContentView (Resource.Layout.Main);
 			
 			acc = new FluidsynthMidiAccess ();
+			acc.HandleNativeError = (messageManaged, messageNative) => {
+				Android.Util.Log.Error ("FluidsynthPlayground", messageManaged + " : " + messageNative);
+				return true;
+			};
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
 				// Note that it is NOT audio sample rate but *synthesizing* sample rate.

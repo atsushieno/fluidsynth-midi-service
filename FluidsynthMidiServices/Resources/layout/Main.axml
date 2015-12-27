@@ -18,6 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="200px"
         android:scrollbars="horizontal|vertical"
+        android:allowUndo="true"
+        android:breakStrategy="simple"
+        android:typeface="monospace"
         android:hint="edit MML here and tap play MML button" />
     <Button
         android:id="@+id/playMML"
