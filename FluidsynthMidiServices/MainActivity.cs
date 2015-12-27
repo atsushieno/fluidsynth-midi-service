@@ -92,7 +92,7 @@ namespace FluidsynthMidiServices
 			var playMmlButton = FindViewById<Button> (Resource.Id.playMML);
 			MidiPlayer player2 = null;
 			playMmlButton.Click += delegate {
-				if (player2 == null || player2.State == PlayerState.Paused || player2.State == PlayerState.Stopped) {
+				if (player2 == null) {
 					var compiler = new MmlCompiler ();
 					compiler.Resolver = new AssetResolver (this);
 					var midiStream = new MemoryStream ();
@@ -114,6 +114,7 @@ namespace FluidsynthMidiServices
 					playMmlButton.Text = "stopped";
 					player2.PauseAsync ();
 					player2.Dispose ();
+					player2 = null;
 				}
 			};
 		}
