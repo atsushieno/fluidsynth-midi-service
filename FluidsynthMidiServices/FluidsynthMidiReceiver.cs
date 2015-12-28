@@ -31,8 +31,7 @@ namespace FluidsynthMidiServices
 			//settings [ConfigurationKeys.AudioPeriods].IntValue = 16;
 			//settings [ConfigurationKeys.AudioPeriods].IntValue = 64;
 
-			// This is required.
-			settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
+			settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
 
 			// Note that it is NOT audio sample rate but *synthesizing* sample rate.
 			// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
@@ -126,7 +125,7 @@ namespace FluidsynthMidiServices
 				syn.ChannelPressure (ch, msg [offset + 1]);
 				break;
 			case 0xE0:
-				syn.PitchBend (ch, (msg [offset + 1] << 14) + msg [offset + 2]);
+				synth.PitchBend (ch, msg [offset + 1] + msg [offset + 2] * 0x80);
 				break;
 			case 0xF0:
 				syn.Sysex (new ArraySegment<byte> (msg, offset, count).ToArray (), null);

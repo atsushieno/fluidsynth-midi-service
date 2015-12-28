@@ -35,7 +35,7 @@ namespace FluidsynthMidiServices
 				return true;
 			};
 			acc.ConfigureSettings += settings => {
-				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits";
+				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
 				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
 				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
 				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
@@ -50,6 +50,8 @@ namespace FluidsynthMidiServices
 			
 			var playChordButton = FindViewById<Button> (Resource.Id.playChord);
 			bool noteOn = false;
+			if (Android.OS.Build.VERSION.SdkInt < BuildVersionCodes.M)
+				playChordButton.Enabled = false; // MIDI API not supported.
 			
 			playChordButton.Click += delegate {
 				//var midiService = this.GetSystemService (MidiService).JavaCast<MidiManager> ();
@@ -72,7 +74,7 @@ namespace FluidsynthMidiServices
 				playChordButton.Text = noteOn ? "playing" : "off";
 			};
 			
-			var music = SmfMusic.Read (this.Assets.Open ("rain.mid"));
+			var music = SmfMusic.Read (this.Assets.Open ("escape.mid"));
 			MidiPlayer player = null;
 			var playSongButton = FindViewById<Button> (Resource.Id.playSong);
 			playSongButton.Click += delegate {

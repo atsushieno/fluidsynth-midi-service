@@ -130,5 +130,6 @@
     <AndroidAsset Include="..\external\mugene\mml\nrpn-gs-xg.mml">
       <Link>Assets\nrpn-gs-xg.mml</Link>
     </AndroidAsset>
+    <AndroidAsset Include="Assets\escape.mid" />
   </ItemGroup>
 </Project>
