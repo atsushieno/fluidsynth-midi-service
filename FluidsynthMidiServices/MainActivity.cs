@@ -62,8 +62,12 @@ namespace FluidsynthMidiServices
 			var playSongButton = FindViewById<Button> (Resource.Id.playSong);
 			playSongButton.Click += delegate {
 				if (player == null || player.State == PlayerState.Paused || player.State == PlayerState.Stopped) {
-					if (player == null)
-						StartNewSong (GetSongData (songFileOrUrlTextEdit.Text ?? "escape.mid")); // if empty, play some song from asset.
+					if (player == null) {
+						string song = songFileOrUrlTextEdit.Text;
+						song = string.IsNullOrEmpty (song) ? "escape.mid" : song;
+						// if empty, play some song from asset.
+						StartNewSong (GetSongData (song));
+					}
 					playSongButton.Text = "playing";
 					player.PlayAsync ();
 				} else {
