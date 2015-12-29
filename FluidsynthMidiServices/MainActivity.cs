@@ -58,11 +58,12 @@ namespace FluidsynthMidiServices
 				playChordButton.Text = noteOn ? "playing" : "Test Android MIDI API";
 			};
 			
+			var songFileOrUrlTextEdit = FindViewById<EditText> (Resource.Id.songFileNameOrUrlEditText);
 			var playSongButton = FindViewById<Button> (Resource.Id.playSong);
 			playSongButton.Click += delegate {
 				if (player == null || player.State == PlayerState.Paused || player.State == PlayerState.Stopped) {
 					if (player == null)
-						StartNewSong (GetSongData ());
+						StartNewSong (GetSongData (songFileOrUrlTextEdit.Text ?? "escape.mid")); // if empty, play some song from asset.
 					playSongButton.Text = "playing";
 					player.PlayAsync ();
 				} else {
@@ -97,15 +98,15 @@ namespace FluidsynthMidiServices
 			};
 		}
 		
-		SmfMusic GetSongData ()
+		SmfMusic GetSongData (string url)
 		{
-			return SmfMusic.Read (this.Assets.Open ("escape.mid"));
+			return SmfMusic.Read (new AssetOrUrlResolver (this).ResolveStream (url));
 		}
 		
 		SmfMusic CompileMmlToSong (string mml)
 		{
 			var compiler = new MmlCompiler ();
-			compiler.Resolver = new AssetResolver (this);
+			compiler.Resolver = new AssetOrUrlResolver (this);
 			var midiStream = new MemoryStream ();
 			var source = new MmlInputSource ("", new StringReader (mml));
 			compiler.Compile (false, Enumerable.Repeat (source, 1).ToArray (), null, midiStream, false);
@@ -144,23 +145,33 @@ namespace FluidsynthMidiServices
 			acc.Soundfonts.Add (default_soundfont);
 		}
 
-		class AssetResolver : StreamResolver
+		class AssetOrUrlResolver : StreamResolver
 		{
 			Context context;
-			public AssetResolver (Context context)
+			public AssetOrUrlResolver (Context context)
 			{
 				this.context = context;
 			}
 			
-			public override TextReader Resolve (string url)
+			public System.IO.Stream ResolveStream (string url)
 			{
-				System.IO.Stream stream;
+				System.IO.Stream stream = null;
 				System.Uri uri;
 				if (Uri.TryCreate (null, UriKind.RelativeOrAbsolute, out uri) && uri.Scheme != Uri.UriSchemeFile)
-					stream = new HttpClient ().GetStreamAsync (url).Result;
-				else
-					stream = context.Assets.Open ("mugene/mml/" + url) ?? context.Assets.Open (url);
-				return new StreamReader (stream);
+					return new HttpClient ().GetStreamAsync (url).Result;
+				foreach (var s in new string [] {url, "mugene/mml/" + url}) {
+					try {
+						return context.Assets.Open (s);
+					} catch (Exception) {
+						stream = null;
+					}
+				}
+				return stream;
+			}
+			
+			public override TextReader Resolve (string url)
+			{
+				return new StreamReader (ResolveStream (url));
 			}
 		}
 

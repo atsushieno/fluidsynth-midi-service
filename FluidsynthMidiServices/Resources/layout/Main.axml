@@ -8,6 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Test Android MIDI API" />
+    <EditText
+        android:id="@+id/songFileNameOrUrlEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="specify .mid file name or URL" />
     <Button
         android:id="@+id/playSong"
         android:layout_width="match_parent"
