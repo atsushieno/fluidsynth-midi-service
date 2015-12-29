@@ -1,19 +1,21 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Threading;
 
 using Android.App;
 using Android.Content;
+using Android.Media;
+using Android.Media.Midi;
+using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.OS;
-using Android.Media.Midi;
-using System.Linq;
 using Commons.Music.Midi;
-using NFluidsynth;
-using Android.Media;
 using Commons.Music.Midi.Mml;
-using System.IO;
+using NFluidsynth;
 using NFluidsynth.MidiManager;
 
 namespace FluidsynthMidiServices
@@ -23,30 +25,12 @@ namespace FluidsynthMidiServices
 	{
 		FluidsynthMidiReceiver recv;
 		FluidsynthMidiAccess acc;
+		MidiPlayer player = null;
 		
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
-			
-			acc = new FluidsynthMidiAccess ();
-			acc.HandleNativeError = (messageManaged, messageNative) => {
-				Android.Util.Log.Error ("FluidsynthPlayground", messageManaged + " : " + messageNative);
-				return true;
-			};
-			acc.ConfigureSettings += settings => {
-				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
-				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
-				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
-				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
-				var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
-				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
-				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
-				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
-				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
-			};
-			string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
-			acc.Soundfonts.Add (default_soundfont);
 			
 			var playChordButton = FindViewById<Button> (Resource.Id.playChord);
 			bool noteOn = false;
@@ -71,16 +55,14 @@ namespace FluidsynthMidiServices
 					recv.OnSend (new Byte [] { 0x90, 0x39, 0x60 }, 0, 3, 0);
 				}
 				noteOn = !noteOn;
-				playChordButton.Text = noteOn ? "playing" : "off";
+				playChordButton.Text = noteOn ? "playing" : "Test Android MIDI API";
 			};
 			
-			var music = SmfMusic.Read (this.Assets.Open ("escape.mid"));
-			MidiPlayer player = null;
 			var playSongButton = FindViewById<Button> (Resource.Id.playSong);
 			playSongButton.Click += delegate {
 				if (player == null || player.State == PlayerState.Paused || player.State == PlayerState.Stopped) {
 					if (player == null)
-						player = new MidiPlayer (music, acc);
+						StartNewSong (GetSongData ());
 					playSongButton.Text = "playing";
 					player.PlayAsync ();
 				} else {
@@ -92,33 +74,74 @@ namespace FluidsynthMidiServices
 			var mmlEditText = FindViewById<EditText> (Resource.Id.editText);
 			mmlEditText.Text = new StreamReader (Assets.Open ("rain.mml")).ReadToEnd ();
 			var playMmlButton = FindViewById<Button> (Resource.Id.playMML);
-			MidiPlayer player2 = null;
 			playMmlButton.Click += delegate {
-				if (player2 == null) {
-					var compiler = new MmlCompiler ();
-					compiler.Resolver = new AssetResolver (this);
-					var midiStream = new MemoryStream ();
-					var source = new MmlInputSource ("", new StringReader (mmlEditText.Text));
+				if (player == null) {
+					SmfMusic song;
 					try {
-						compiler.Compile (false, Enumerable.Repeat (source, 1).ToArray (), null, midiStream, false);
+						song = CompileMmlToSong (mmlEditText.Text);
 					} catch (MmlException ex) {
-						Android.Util.Log.Error ("FluidsynthPlayground", ex.ToString ());
+						Log.Error ("FluidsynthPlayground", ex.ToString ());
 						Toast.MakeText (this, ex.Message, ToastLength.Long).Show ();
 						return;
 					}
 					
-					var music2 = SmfMusic.Read (new MemoryStream (midiStream.ToArray ()));
-					player2 = new MidiPlayer (music2, acc);
+					StartNewSong (song);
 					
 					playMmlButton.Text = "playing";
-					player2.PlayAsync ();
 				} else {
 					playMmlButton.Text = "stopped";
-					player2.PauseAsync ();
-					player2.Dispose ();
-					player2 = null;
+					player.PauseAsync ();
+					player.Dispose ();
+					player = null;
 				}
 			};
+		}
+		
+		SmfMusic GetSongData ()
+		{
+			return SmfMusic.Read (this.Assets.Open ("escape.mid"));
+		}
+		
+		SmfMusic CompileMmlToSong (string mml)
+		{
+			var compiler = new MmlCompiler ();
+			compiler.Resolver = new AssetResolver (this);
+			var midiStream = new MemoryStream ();
+			var source = new MmlInputSource ("", new StringReader (mml));
+			compiler.Compile (false, Enumerable.Repeat (source, 1).ToArray (), null, midiStream, false);
+			return SmfMusic.Read (new MemoryStream (midiStream.ToArray ()));
+		}
+		
+		void StartNewSong (SmfMusic music)
+		{
+			if (player != null)
+				player.Dispose ();
+			if (acc == null)
+				SetupMidiAccess ();
+			player = new MidiPlayer (music, acc);
+			player.PlayAsync ();
+		}
+		
+		void SetupMidiAccess ()
+		{
+			acc = new FluidsynthMidiAccess ();
+			acc.HandleNativeError = (messageManaged, messageNative) => {
+				Android.Util.Log.Error ("FluidsynthPlayground", messageManaged + " : " + messageNative);
+				return true;
+			};
+			acc.ConfigureSettings += settings => {
+				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
+				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
+				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
+				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
+				var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
+				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
+				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
+				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
+				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
+			};
+			string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
+			acc.Soundfonts.Add (default_soundfont);
 		}
 
 		class AssetResolver : StreamResolver
@@ -129,9 +152,15 @@ namespace FluidsynthMidiServices
 				this.context = context;
 			}
 			
-			public override TextReader Resolve (string uri)
+			public override TextReader Resolve (string url)
 			{
-				return new StreamReader (context.Assets.Open (uri));
+				System.IO.Stream stream;
+				System.Uri uri;
+				if (Uri.TryCreate (null, UriKind.RelativeOrAbsolute, out uri) && uri.Scheme != Uri.UriSchemeFile)
+					stream = new HttpClient ().GetStreamAsync (url).Result;
+				else
+					stream = context.Assets.Open ("mugene/mml/" + url) ?? context.Assets.Open (url);
+				return new StreamReader (stream);
 			}
 		}
 
@@ -148,5 +177,4 @@ namespace FluidsynthMidiServices
 		}
 	}
 }
-
 

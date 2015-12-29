@@ -7,7 +7,7 @@
         android:id="@+id/playChord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="chord" />
+        android:text="Test Android MIDI API" />
     <Button
         android:id="@+id/playSong"
         android:layout_width="match_parent"

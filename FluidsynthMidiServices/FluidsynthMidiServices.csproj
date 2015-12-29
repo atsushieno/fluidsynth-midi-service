@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -76,9 +77,6 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <None Include="..\external\mugene\mml\vsq-support.mml">
-      <Link>Assets\vsq-support.mml</Link>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -118,18 +116,6 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\rain.mid" />
     <AndroidAsset Include="Assets\rain.mml" />
-    <AndroidAsset Include="..\external\mugene\mml\default-macro.mml">
-      <Link>Assets\default-macro.mml</Link>
-    </AndroidAsset>
-    <AndroidAsset Include="..\external\mugene\mml\drum-part.mml">
-      <Link>Assets\drum-part.mml</Link>
-    </AndroidAsset>
-    <AndroidAsset Include="..\external\mugene\mml\gs-sysex.mml">
-      <Link>Assets\gs-sysex.mml</Link>
-    </AndroidAsset>
-    <AndroidAsset Include="..\external\mugene\mml\nrpn-gs-xg.mml">
-      <Link>Assets\nrpn-gs-xg.mml</Link>
-    </AndroidAsset>
     <AndroidAsset Include="Assets\escape.mid" />
   </ItemGroup>
 </Project>
