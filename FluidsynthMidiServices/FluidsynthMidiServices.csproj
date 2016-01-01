@@ -108,6 +108,10 @@
       <Project>{46EF997F-86AB-4DCC-ABA8-63D97F973FA0}</Project>
       <Name>mugenelib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Commons.Music.Midi.AndroidMidiAccess\Commons.Music.Midi.AndroidMidiAccess.csproj">
+      <Project>{6C5EE058-E3D8-4390-9434-181C1743AB74}</Project>
+      <Name>Commons.Music.Midi.AndroidMidiAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>

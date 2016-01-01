@@ -27,6 +27,7 @@ namespace FluidsynthMidiServices
 		public static void UpdateIdValues()
 		{
 			global::mugenelib.Resource.String.library_name = global::FluidsynthMidiServices.Resource.String.library_name;
+			global::Commons.Music.Midi.AndroidMidiAccess.Resource.String.library_name = global::FluidsynthMidiServices.Resource.String.library_name;
 		}
 		
 		public partial class Attribute

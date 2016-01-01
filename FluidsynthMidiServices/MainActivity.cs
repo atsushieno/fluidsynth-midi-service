@@ -24,7 +24,7 @@ namespace FluidsynthMidiServices
 	public class MainActivity : Activity
 	{
 		FluidsynthMidiReceiver recv;
-		FluidsynthMidiAccess acc;
+		IMidiAccess acc;
 		MidiPlayer player = null;
 		
 		protected override void OnCreate (Bundle bundle)
@@ -129,7 +129,11 @@ namespace FluidsynthMidiServices
 		
 		void SetupMidiAccess ()
 		{
-			acc = new FluidsynthMidiAccess ();
+#if TEST_MIDI_API_BASED_ACCESS
+			acc = new Commons.Music.Midi.AndroidMidiAccess.MidiAccess (this);
+#else
+			var acc = new FluidsynthMidiAccess ();
+			this.acc = acc;
 			acc.HandleNativeError = (messageManaged, messageNative) => {
 				Android.Util.Log.Error ("FluidsynthPlayground", messageManaged + " : " + messageNative);
 				return true;
@@ -149,6 +153,7 @@ namespace FluidsynthMidiServices
 			if (Directory.Exists (sf2Dir))
 				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
 					acc.Soundfonts.Add (obbSf2);
+#endif
 		}
 
 		class AssetOrUrlResolver : StreamResolver
