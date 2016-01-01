@@ -16,3 +16,7 @@ hackinstall:
 	cp $(ANDROID_NDK_PATH)/prebuilt/android-x86/gdbserver/gdbserver NFluidsynth.Android/Libs/x86/gdbserver.so
 	xbuild
 	xbuild FluidsynthMidiServices/FluidsynthMidiServices.csproj /t:Install $(XBUILD_ARGS)
+
+obb:
+	# runnable only under Ubuntu + sf2 (fluid-soundfont-gm etc.) installed
+	jobb -v -d /usr/share/sounds/sf2 -o FluidsynthMidiServices/bin/Release/sf2.obb -pn name.atsushieno.fluidsynthmidideviceservice -pv 0

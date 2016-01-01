@@ -42,7 +42,10 @@ namespace FluidsynthMidiServices
 			settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
 #if MIDI_MANAGER
 			};
-			access.Soundfonts.Add (default_soundfont);
+			string sf2Dir = Path.Combine (context.ObbDir.AbsolutePath);
+			if (Directory.Exists (sf2Dir))
+				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+					access.Soundfonts.Add (obbSf2);
 			output = access.OpenOutputAsync (access.Outputs.First ().Id).Result;
 #else
 			syn = new Synth (settings);
@@ -60,13 +63,12 @@ namespace FluidsynthMidiServices
 		AudioDriver adriver;
 #endif
 		
-		// FIXME: this is hack until we get proper sf loader.
-		const string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
-
 		void LoadDefaultSoundFontSpecial (Context context, Synth synth)
 		{
-			//Console.WriteLine ("!!!!!!!!!!!!!!! {0}", context.ApplicationInfo.DataDir);
-			synth.LoadSoundFont (default_soundfont, true);
+			string sf2Dir = Path.Combine (context.ObbDir.AbsolutePath);
+			if (Directory.Exists (sf2Dir))
+				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+					synth.LoadSoundFont (obbSf2, true);
 		}
 
 		protected override void Dispose (bool disposing)

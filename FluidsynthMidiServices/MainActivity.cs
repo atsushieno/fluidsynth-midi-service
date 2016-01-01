@@ -145,8 +145,10 @@ namespace FluidsynthMidiServices
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
 			};
-			string default_soundfont = "/sdcard/tmp/FluidR3_GM.sf2";
-			acc.Soundfonts.Add (default_soundfont);
+			string sf2Dir = Path.Combine (ObbDir.AbsolutePath);
+			if (Directory.Exists (sf2Dir))
+				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+					acc.Soundfonts.Add (obbSf2);
 		}
 
 		class AssetOrUrlResolver : StreamResolver
