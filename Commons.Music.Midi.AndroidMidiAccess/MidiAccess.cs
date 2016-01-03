@@ -41,7 +41,10 @@ namespace Commons.Music.Midi.AndroidMidiAccess
 
 		public Task<IMidiOutput> OpenOutputAsync (string portId)
 		{
-			throw new NotImplementedException ();
+			var ip = (MidiPortDetails) Outputs.First (i => i.Id == portId);
+			var dev = open_devices.FirstOrDefault (d => ip.Device.Id == d.Info.Id);
+			var l = new OpenDeviceListener (this, dev, ip);
+			return l.OpenOutputAsync (CancellationToken.None);			
 		}
 
 		class OpenDeviceListener : Java.Lang.Object, MidiManager.IOnDeviceOpenedListener
@@ -53,25 +56,32 @@ namespace Commons.Music.Midi.AndroidMidiAccess
 			
 			public OpenDeviceListener (MidiAccess parent, MidiDevice device, MidiPortDetails portToOpen)
 			{
+				if (parent == null)
+					throw new ArgumentNullException (nameof (parent));
+				if (portToOpen == null)
+					throw new ArgumentNullException (nameof (portToOpen));
 				this.parent = parent;
+				this.device = device;
 				port_to_open = portToOpen;
 			}
 			
 			public Task<IMidiInput> OpenInputAsync (CancellationToken token)
 			{
-				return OpenAsync (token, dev => (IMidiInput) new MidiInput (port_to_open, device.OpenOutputPort (port_to_open.Port.PortNumber)));
+				// MidiInput takes Android.Media.Midi.MidiOutputPort because... Android.Media.Midi API sucks and MidiOutputPort represents a MIDI IN device(!!)
+				return OpenAsync (token, dev => (IMidiInput) new MidiInput (port_to_open, dev.OpenOutputPort (port_to_open.Port.PortNumber)));
 			}
 			
 			public Task<IMidiOutput> OpenOutputAsync (CancellationToken token)
 			{
-				return OpenAsync (token, dev => (IMidiOutput) new MidiOutput (port_to_open, device.OpenInputPort (port_to_open.Port.PortNumber)));
+				// MidiOutput takes Android.Media.Midi.MidiInputPort because... Android.Media.Midi API sucks and MidiInputPort represents a MIDI OUT device(!!)
+				return OpenAsync (token, dev => (IMidiOutput) new MidiOutput (port_to_open, dev.OpenInputPort (port_to_open.Port.PortNumber)));
 			}
 			
 			Task<T> OpenAsync<T> (CancellationToken token, Func<MidiDevice, T> resultCreator)
 			{
 				return Task.Run (delegate {
-					wait = new ManualResetEventSlim ();
 					if (device == null) {
+						wait = new ManualResetEventSlim ();
 						parent.midi_manager.OpenDevice (port_to_open.Device, this, null);
 						wait.Wait (token);
 						wait.Reset ();
@@ -82,6 +92,9 @@ namespace Commons.Music.Midi.AndroidMidiAccess
 			
 			public void OnDeviceOpened (MidiDevice device)
 			{
+				if (device == null)
+					throw new ArgumentNullException (nameof (device));
+				this.device = device;
 				parent.open_devices.Add (device);
 				wait.Set ();
 			}
@@ -95,6 +108,10 @@ namespace Commons.Music.Midi.AndroidMidiAccess
 		
 		public MidiPortDetails (MidiDeviceInfo device, MidiDeviceInfo.PortInfo port)
 		{
+			if (device == null)
+				throw new ArgumentNullException (nameof (device));
+			if (port == null)
+				throw new ArgumentNullException (nameof (port));
 			this.device = device;
 			this.port = port;
 		}
