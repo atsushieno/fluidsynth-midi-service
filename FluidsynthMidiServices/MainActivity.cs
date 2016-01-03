@@ -32,6 +32,10 @@ namespace FluidsynthMidiServices
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.Main);
 			
+			FindViewById<Button> (Resource.Id.openFreeStylePad).Click += delegate {
+				this.StartActivity (new Intent (this, typeof (RhythmPadActivity)));
+			};
+			
 			var playChordButton = FindViewById<Button> (Resource.Id.playChord);
 			bool noteOn = false;
 			if (Android.OS.Build.VERSION.SdkInt < BuildVersionCodes.M)
@@ -140,11 +144,15 @@ namespace FluidsynthMidiServices
 			};
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
-				// Note that it is NOT audio sample rate but *synthesizing* sample rate.
-				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
+				
 				var manager = GetSystemService (Context.AudioService).JavaCast<AudioManager> ();
-				var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
-				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
+				
+				// Note that SynthSampleRate is NOT audio sample rate but *synthesizing* sample rate.
+				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
+				//var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
+				//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
+				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
+				
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
