@@ -19,15 +19,17 @@ namespace FluidsynthMidiServices
 	public class RhythmPadActivity : Activity, ISurfaceHolderCallback2
 	{
 		bool initialized;
+		int size;
 		
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
 			SetContentView (Resource.Layout.RhythmPad);
-			
+
 			SurfaceView sv = FindViewById<SurfaceView> (Resource.Id.mainSurface);
 			sv.Holder.AddCallback (this);
+
 			sv.Touch += (sender, e) => {
 				int index = -1;
 				bool on = false;
@@ -47,12 +49,13 @@ namespace FluidsynthMidiServices
 					index = e.Event.ActionIndex;
 					goto case MotionEventActions.PointerIndexMask;
 				case MotionEventActions.PointerIndexMask:
-					var x = index < 0 ? e.Event.RawX : e.Event.GetX (index);
-					var y = index < 0 ? e.Event.RawY : e.Event.GetY (index);
-					if (8 <= x && x < 7 * 64 + 48 + 8 &&
-					    8 <= y && y < 5 * 64 + 48 + 8) {
-						int h = (int) ((x - 8) / 64);
-						int v = (int) ((y - 8) / 64);
+					
+					var x = index < 0 ? e.Event.GetX () : e.Event.GetX (index);
+					var y = index < 0 ? e.Event.GetY () : e.Event.GetY (index);
+					if (8 <= x && x < 8 * size - 16 &&
+					    8 <= y && y < 8 * size - 16) {
+						int h = (int) ((x - 8) / size);
+						int v = (int) ((y - 8) / size);
 						var output = MidiState.Instance.GetMidiOutput (this);
 						if (!initialized) {
 							initialized = true;
@@ -63,7 +66,7 @@ namespace FluidsynthMidiServices
 						}
 						output.SendAsync (new byte [] {
 							(byte) (on ? 0x99 : 0x89),
-							(byte) (0x30 + v * 8 + h),
+							(byte) (0x20 + v * 8 + h),
 							(byte) (on ? 120 : 0)}, 0, 3, 0);
 					}
 					break;
@@ -75,9 +78,10 @@ namespace FluidsynthMidiServices
 		{
 			var canvas = holder.LockCanvas ();
 			var paint = new Paint () { Color = Color.White, StrokeWidth = 2 };
-			for (int v = 0; v < 4; v++)
+			size = Math.Min (canvas.Width, canvas.Height) / 8;
+			for (int v = 0; v < 8; v++)
 				for (int h = 0; h < 8; h++)
-					canvas.DrawRoundRect (8 + h * 64, 8 + v * 64, h * 64 + 48 + 8, v * 64 + 48 + 8, 5, 5, paint);
+					canvas.DrawRoundRect (8 + h * size, 8 + v * size, (h + 1) * size - 16, (v + 1) * size - 16, 5, 5, paint);
 			holder.UnlockCanvasAndPost (canvas);
 		}
 
