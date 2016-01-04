@@ -73,6 +73,7 @@
     <Compile Include="FluidsynthMidiDeviceService.cs" />
     <Compile Include="FluidsynthMidiReceiver.cs" />
     <Compile Include="RhythmPadActivity.cs" />
+    <Compile Include="MidiState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -113,6 +114,10 @@
     <ProjectReference Include="..\Commons.Music.Midi.AndroidMidiAccess\Commons.Music.Midi.AndroidMidiAccess.csproj">
       <Project>{6C5EE058-E3D8-4390-9434-181C1743AB74}</Project>
       <Name>Commons.Music.Midi.AndroidMidiAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NAudio.SoundFont.Android\NAudio.SoundFont.Android.csproj">
+      <Project>{361A7415-3B9F-49A8-8EA3-97E13604566B}</Project>
+      <Name>NAudio.SoundFont.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
