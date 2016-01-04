@@ -123,5 +123,7 @@
     <AndroidAsset Include="Assets\rain.mid" />
     <AndroidAsset Include="Assets\rain.mml" />
     <AndroidAsset Include="Assets\escape.mid" />
+    <AndroidAsset Include="Assets\wish.mid" />
+    <AndroidAsset Include="Assets\wish.mml" />
   </ItemGroup>
 </Project>

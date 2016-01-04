@@ -72,16 +72,18 @@ namespace FluidsynthMidiServices
 						// if empty, play some song from asset.
 						StartNewSong (GetSongData (song));
 					}
-					playSongButton.Text = "playing";
+					playSongButton.Text = "playing...";
 					player.PlayAsync ();
 				} else {
-					playSongButton.Text = "paused";
+					playSongButton.Text = "Play song";
 					player.PauseAsync ();
+					player.Dispose ();
+					player = null;
 				}
 			};
 			
 			var mmlEditText = FindViewById<EditText> (Resource.Id.editText);
-			mmlEditText.Text = new StreamReader (Assets.Open ("rain.mml")).ReadToEnd ();
+			mmlEditText.Text = new StreamReader (Assets.Open ("wish.mml")).ReadToEnd ();
 			var playMmlButton = FindViewById<Button> (Resource.Id.playMML);
 			playMmlButton.Click += delegate {
 				if (player == null) {
@@ -96,9 +98,9 @@ namespace FluidsynthMidiServices
 					
 					StartNewSong (song);
 					
-					playMmlButton.Text = "playing";
+					playMmlButton.Text = "playing...";
 				} else {
-					playMmlButton.Text = "stopped";
+					playMmlButton.Text = "Play MML";
 					player.PauseAsync ();
 					player.Dispose ();
 					player = null;
