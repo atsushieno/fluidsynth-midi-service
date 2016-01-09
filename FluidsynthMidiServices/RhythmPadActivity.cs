@@ -36,29 +36,15 @@ namespace FluidsynthMidiServices
 			sv.Touch += (sender, e) => {
 				int index = -1;
 				bool on = false;
-				switch (e.Event.Action) {
+				switch ((MotionEventActions) ((int) e.Event.Action & (int) MotionEventActions.Mask)) {
+				// single touch...
 				case MotionEventActions.Down:
 					on = true;
 					goto case MotionEventActions.PointerIndexMask;
 				case MotionEventActions.Up:
 					on = false;
 					goto case MotionEventActions.PointerIndexMask;
-				case MotionEventActions.Pointer2Down:
-					on = true;
-					index = 1;
-					goto case MotionEventActions.PointerIndexMask;
-				case MotionEventActions.Pointer2Up:
-					on = false;
-					index = 1;
-					goto case MotionEventActions.PointerIndexMask;
-				case MotionEventActions.Pointer3Down:
-					on = true;
-					index = 2;
-					goto case MotionEventActions.PointerIndexMask;
-				case MotionEventActions.Pointer3Up:
-					on = false;
-					index = 2;
-					goto case MotionEventActions.PointerIndexMask;
+				// it never fires for the first touch... .Down is raised instead :/
 				case MotionEventActions.PointerDown:
 					on = true;
 					index = e.Event.ActionIndex;
