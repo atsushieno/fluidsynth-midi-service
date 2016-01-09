@@ -43,6 +43,22 @@ namespace FluidsynthMidiServices
 				case MotionEventActions.Up:
 					on = false;
 					goto case MotionEventActions.PointerIndexMask;
+				case MotionEventActions.Pointer2Down:
+					on = true;
+					index = 1;
+					goto case MotionEventActions.PointerIndexMask;
+				case MotionEventActions.Pointer2Up:
+					on = false;
+					index = 1;
+					goto case MotionEventActions.PointerIndexMask;
+				case MotionEventActions.Pointer3Down:
+					on = true;
+					index = 2;
+					goto case MotionEventActions.PointerIndexMask;
+				case MotionEventActions.Pointer3Up:
+					on = false;
+					index = 2;
+					goto case MotionEventActions.PointerIndexMask;
 				case MotionEventActions.PointerDown:
 					on = true;
 					index = e.Event.ActionIndex;
@@ -72,6 +88,8 @@ namespace FluidsynthMidiServices
 							(byte) (0x20 + v * 8 + h),
 							(byte) (on ? 120 : 0)}, 0, 3, 0);
 					}
+					break;
+				default:
 					break;
 				}
 			};
