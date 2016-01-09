@@ -7,7 +7,7 @@ using Android.Content;
 using Android.Media.Midi;
 using Android.Runtime;
 
-namespace Commons.Music.Midi.AndroidMidiAccess
+namespace Commons.Music.Midi.AndroidExtensions
 {
 	public class MidiAccess : IMidiAccess
 	{
