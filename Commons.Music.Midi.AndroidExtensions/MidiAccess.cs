@@ -244,4 +244,3 @@ namespace Commons.Music.Midi.AndroidExtensions
 		}
 	}
 }
-

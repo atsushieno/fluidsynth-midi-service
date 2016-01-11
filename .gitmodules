@@ -10,3 +10,6 @@
 [submodule "external/mugene"]
 	path = external/mugene
 	url = https://github.com/atsushieno/mugene.git
+[submodule "external/naudio"]
+	path = external/naudio
+	url = https://github.com/naudio/NAudio.git
