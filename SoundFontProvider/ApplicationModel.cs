@@ -24,9 +24,9 @@ namespace SoundFontProvider
 		public void LoadFromDirectory (string path)
 		{
 			if (Directory.Exists (path)) {
-				foreach (var obbSf2 in Directory.GetFiles (path, "*.sf2", SearchOption.AllDirectories)) {
-					var mod = Database.RegisterOrUpdate (obbSf2);
-					Files [Path.GetFullPath (obbSf2)] = mod.Name;
+				foreach (var sf2 in Directory.GetFiles (path, "*.sf2", SearchOption.AllDirectories)) {
+					var mod = Database.RegisterOrUpdate (sf2);
+					Files [Path.GetFullPath (sf2)] = mod.Name;
 				}
 			}
 		}
