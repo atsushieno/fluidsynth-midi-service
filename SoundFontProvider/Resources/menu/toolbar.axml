@@ -1,0 +1,8 @@
+﻿<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/toolbar_addnewfolder"
+            android:checked="true"
+            android:title="Add New Soundfont Folder" />
+    </group>
+</menu>

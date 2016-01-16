@@ -15,11 +15,12 @@ using Android.Views;
 using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Runtime;
+using Android.Support.V7.App;
 
 namespace SoundFontProvider
 {
-	[Activity (Label = "SoundFontProvider", MainLauncher = true, Icon = "@mipmap/icon")]
-	public class MainActivity : FragmentActivity
+	[Activity (Label = "SoundFontProvider", MainLauncher = true, Icon = "@mipmap/icon", Theme="@style/Theme.Styled")]
+	public class MainActivity : AppCompatActivity
 	{
 		const string predefined_temp_path = "/data/local/tmp/name.atsushieno.soundfontprovider";
 
@@ -37,7 +38,7 @@ namespace SoundFontProvider
 				e.Commit ();
 			});
 
-			if (!model.Settings.SearchPaths.Contains (ObbDir.AbsolutePath))
+			if (ObbDir != null && !model.Settings.SearchPaths.Contains (ObbDir.AbsolutePath))
 				model.AddSearchPaths (ObbDir.AbsolutePath);
 			if (!model.Settings.SearchPaths.Contains (predefined_temp_path))
 				model.AddSearchPaths (predefined_temp_path);
@@ -48,11 +49,19 @@ namespace SoundFontProvider
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
+			//SetSupportActionBar (FindViewById<Android.Support.V7.Widget.Toolbar> (Resource.Id.mainToolbar));
+
 			var vp = FindViewById<ViewPager> (Resource.Id.mainViewPager);
 			var vpa = new TheViewPagerAdapter (SupportFragmentManager);
 			vpa.Add ("Installed SoundFonts", new InstalledSoundFontFragment ());
-			vpa.Add ("Online Catalog", new OnlineCatalogFragment ());
+			vpa.Add ("SoundFont Folders", new SoundFontFolderListFragment ());
+			vpa.Add ("Online Catalogs", new OnlineCatalogFragment ());
 			vp.Adapter = vpa;
+
+			FindViewById<TabLayout> (Resource.Id.mainTabLayout).TabMode = TabLayout.ModeScrollable;
+
+			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar> (Resource.Id.mainToolbar);
+			toolbar.InflateMenu (Resource.Menu.toolbar);
 
 			var tabl = FindViewById<TabLayout> (Resource.Id.mainTabLayout);
 			tabl.SetupWithViewPager (vp);
@@ -142,6 +151,59 @@ namespace SoundFontProvider
 					if (itemView == null)
 						throw new ArgumentNullException (nameof (itemView));
 					Text = itemView.FindViewById<TextView> (Resource.Id.mainSoundFontListItemText);
+				}
+
+				public TextView Text { get; private set; }
+			}
+		}
+
+		class SoundFontFolderListFragment : Fragment
+		{
+			public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+			{
+				var v = inflater.Inflate (Resource.Layout.MainSoundFontFolderList, container, false);
+
+				var rv = v.FindViewById<RecyclerView> (Resource.Id.mainSoundFontFolderList);
+				rv.SetLayoutManager (new LinearLayoutManager (Activity.BaseContext));
+				rv.SetAdapter (new TheRecyclerViewAdapter ());
+
+				return v;
+			}
+
+			class TheRecyclerViewAdapter : RecyclerView.Adapter
+			{
+				public TheRecyclerViewAdapter ()
+				{
+					var model = ApplicationModel.Instance;
+					data = model.Settings.SearchPaths;
+				}
+
+				string [] data;
+
+				public override int ItemCount {
+					get { return data.Length; }
+				}
+
+				public override void OnBindViewHolder (RecyclerView.ViewHolder holder, int position)
+				{
+					((TheViewHolder) holder).Text.Text = data [position];
+				}
+
+				public override RecyclerView.ViewHolder OnCreateViewHolder (ViewGroup parent, int viewType)
+				{
+					var v = LayoutInflater.From (parent.Context).Inflate (Resource.Layout.MainSoundFontFolderListItem, parent, false);
+					var h = new TheViewHolder (v);
+					return h;
+				}
+			}
+
+			class TheViewHolder : RecyclerView.ViewHolder
+			{
+				public TheViewHolder (View itemView) : base (itemView)
+				{
+					if (itemView == null)
+						throw new ArgumentNullException (nameof (itemView));
+					Text = itemView.FindViewById<TextView> (Resource.Id.mainSoundFontFolderListItemText);
 				}
 
 				public TextView Text { get; private set; }

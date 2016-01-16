@@ -81,6 +81,9 @@
     <AndroidResource Include="Resources\values\themes.axml" />
     <AndroidResource Include="Resources\layout\MainSoundFontList.axml" />
     <AndroidResource Include="Resources\layout\MainSoundFontListItem.axml" />
+    <AndroidResource Include="Resources\menu\toolbar.axml" />
+    <AndroidResource Include="Resources\layout\MainSoundFontFolderList.axml" />
+    <AndroidResource Include="Resources\layout\MainSoundFontFolderListItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
      <style name="Theme.Styled" parent="@style/Theme.AppCompat">
-         <item name="actionBarStyle">@style/MainActionBar</item>
-         <item name="android:actionBarStyle">@style/MainActionBar</item>
-     </style>
+		<item name="android:actionBarStyle">@style/MainActionBar</item>
+		<item name="actionBarStyle">@style/MainActionBar</item>
+	</style>
 
-     <style name="MainActionBar" parent="@style/Widget.AppCompat.ActionBar">
+     <style name="MainActionBar" parent="@style/Theme.AppCompat.NoActionBar">
      </style>
 
 </resources>
