@@ -40,6 +40,11 @@ namespace SoundFontProvider
 		{
 			Settings.SearchPaths = Settings.SearchPaths.Concat (newPaths).Distinct ().ToArray ();
 		}
+
+		internal void RemoveSearchPaths (params string [] folders)
+		{
+			Settings.SearchPaths = Settings.SearchPaths.Except (folders).ToArray ();
+		}
 	}
 		
 	public class ApplicationSettings

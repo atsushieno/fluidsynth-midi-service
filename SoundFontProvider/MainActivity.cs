@@ -75,12 +75,10 @@ namespace SoundFontProvider
 
 		class FolderChooserDialogFragment : Android.Support.V4.App.DialogFragment
 		{
-			EditText entry;
-
 			public override Dialog OnCreateDialog (Bundle savedInstanceState)
 			{
 				var b = new Android.Support.V7.App.AlertDialog.Builder (Context);
-				entry = new EditText (Context);
+				var entry = new EditText (Context);
 				b.SetMessage ("Select a folder whose descendants contain Soundfonts")
 				 .SetView (entry)
 				 .SetNegativeButton ("Cancel", (sender, e) => {})
@@ -189,18 +187,21 @@ namespace SoundFontProvider
 
 				var rv = v.FindViewById<RecyclerView> (Resource.Id.mainSoundFontFolderList);
 				rv.SetLayoutManager (new LinearLayoutManager (Activity.BaseContext));
-				rv.SetAdapter (new TheRecyclerViewAdapter ());
+				rv.SetAdapter (new TheRecyclerViewAdapter (Activity));
 
 				return v;
 			}
 
 			class TheRecyclerViewAdapter : RecyclerView.Adapter
 			{
-				public TheRecyclerViewAdapter ()
+				public TheRecyclerViewAdapter (FragmentActivity activity)
 				{
+					this.activity = activity;
 					var model = ApplicationModel.Instance;
 					data = model.Settings.SearchPaths;
 				}
+
+				FragmentActivity activity;
 
 				string [] data;
 
@@ -217,7 +218,33 @@ namespace SoundFontProvider
 				{
 					var v = LayoutInflater.From (parent.Context).Inflate (Resource.Layout.MainSoundFontFolderListItem, parent, false);
 					var h = new TheViewHolder (v);
+					v.LongClick += (sender, e) => {
+						var folder = data [h.AdapterPosition];
+						var df = new RemoveFolderDialogFragment (folder);
+						df.Show (activity.SupportFragmentManager, "FolderRemoval");
+					};
 					return h;
+				}
+			}
+
+			class RemoveFolderDialogFragment : Android.Support.V4.App.DialogFragment
+			{
+				public RemoveFolderDialogFragment (string folder)
+				{
+					this.folder = folder;
+				}
+
+				string folder;
+
+				public override Dialog OnCreateDialog (Bundle savedInstanceState)
+				{
+					var b = new Android.Support.V7.App.AlertDialog.Builder (Context);
+					b.SetMessage (string.Format ("Folder '{0}' will be unregistered.", folder))
+					.SetNegativeButton ("Cancel", (sender, e) => {})
+					.SetPositiveButton ("Remove", (sender, e) => {
+						ApplicationModel.Instance.RemoveSearchPaths (folder);
+					});
+					return b.Create ();
 				}
 			}
 

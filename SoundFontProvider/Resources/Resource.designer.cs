@@ -2954,9 +2954,6 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f060001
 			public const int Base_Widget_Design_TabLayout = 2131099649;
 			
-			// aapt resource value: 0x7f060145
-			public const int MainActionBar = 2131099973;
-			
 			// aapt resource value: 0x7f060021
 			public const int Platform_AppCompat = 2131099681;
 			
