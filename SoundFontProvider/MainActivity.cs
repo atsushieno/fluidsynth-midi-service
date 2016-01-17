@@ -28,11 +28,12 @@ namespace SoundFontProvider
 		{
 			base.OnCreate (savedInstanceState);
 
-			string key = "SoundFontProviderStorage";
-			var sp = this.GetSharedPreferences (key, default (FileCreationMode));
+			string sharedPreferenceName = "SoundFontProviderStorage";
+			string key = "settings";
+			var sp = this.GetSharedPreferences (sharedPreferenceName, default (FileCreationMode));
 
 			var model = ApplicationModel.Instance;
-			model.Initialize (sp.GetString ("settings", string.Empty), s => {
+			model.Initialize (sp.GetString (key, string.Empty), s => {
 				var e = sp.Edit ();
 				e.PutString (key, s);
 				e.Commit ();
@@ -40,16 +41,15 @@ namespace SoundFontProvider
 
 			if (ObbDir != null && !model.Settings.SearchPaths.Contains (ObbDir.AbsolutePath))
 				model.AddSearchPaths (ObbDir.AbsolutePath);
+#if DEBUG
 			if (!model.Settings.SearchPaths.Contains (predefined_temp_path))
 				model.AddSearchPaths (predefined_temp_path);
-
+#endif
 			foreach (var path in model.Settings.SearchPaths)
 				model.LoadFromDirectory (path);
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
-
-			//SetSupportActionBar (FindViewById<Android.Support.V7.Widget.Toolbar> (Resource.Id.mainToolbar));
 
 			var vp = FindViewById<ViewPager> (Resource.Id.mainViewPager);
 			var vpa = new TheViewPagerAdapter (SupportFragmentManager);
@@ -62,9 +62,33 @@ namespace SoundFontProvider
 
 			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar> (Resource.Id.mainToolbar);
 			toolbar.InflateMenu (Resource.Menu.toolbar);
+			toolbar.MenuItemClick += (sender, e) => {
+				if (e.Item.ItemId == Resource.Id.toolbar_addnewfolder) {
+					var df = new FolderChooserDialogFragment ();
+					df.Show (SupportFragmentManager, "FolderChooser");
+				}
+			};
 
 			var tabl = FindViewById<TabLayout> (Resource.Id.mainTabLayout);
 			tabl.SetupWithViewPager (vp);
+		}
+
+		class FolderChooserDialogFragment : Android.Support.V4.App.DialogFragment
+		{
+			EditText entry;
+
+			public override Dialog OnCreateDialog (Bundle savedInstanceState)
+			{
+				var b = new Android.Support.V7.App.AlertDialog.Builder (Context);
+				entry = new EditText (Context);
+				b.SetMessage ("Select a folder whose descendants contain Soundfonts")
+				 .SetView (entry)
+				 .SetNegativeButton ("Cancel", (sender, e) => {})
+				 .SetPositiveButton ("Add", (sender, e) => {
+					ApplicationModel.Instance.AddSearchPaths (entry.Text.Trim ());
+				});
+				return b.Create ();
+			}
 		}
 
 		class TheViewPagerAdapter : FragmentPagerAdapter
