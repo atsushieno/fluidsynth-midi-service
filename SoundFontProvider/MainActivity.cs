@@ -238,13 +238,17 @@ namespace SoundFontProvider
 
 				public override Dialog OnCreateDialog (Bundle savedInstanceState)
 				{
-					var b = new Android.Support.V7.App.AlertDialog.Builder (Context);
-					b.SetMessage (string.Format ("Folder '{0}' will be unregistered.", folder))
-					.SetNegativeButton ("Cancel", (sender, e) => {})
-					.SetPositiveButton ("Remove", (sender, e) => {
-						ApplicationModel.Instance.RemoveSearchPaths (folder);
+					var b_ = new Android.Support.V7.App.AlertDialog.Builder (Context);
+					b_.SetItems (new string [] {"Unregister"}, (sender, ea) => {
+						var b = new Android.Support.V7.App.AlertDialog.Builder (Context);
+						b.SetMessage (string.Format ("Folder '{0}' will be unregistered.", folder))
+						.SetNegativeButton ("Cancel", (o, e) => {})
+						.SetPositiveButton ("Remove", (o, e) => {
+							ApplicationModel.Instance.RemoveSearchPaths (folder);
+						});
+						b.Show ();
 					});
-					return b.Create ();
+					return b_.Create ();
 				}
 			}
 
