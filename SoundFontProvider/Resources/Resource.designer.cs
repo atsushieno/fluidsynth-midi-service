@@ -600,6 +600,12 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f010046
 			public const int navigationMode = 2130772038;
 			
+			// aapt resource value: 0x7f010110
+			public const int nnf_separator_color = 2130772240;
+			
+			// aapt resource value: 0x7f010111
+			public const int nnf_toolbarTheme = 2130772241;
+			
 			// aapt resource value: 0x7f01007a
 			public const int overlapAnchor = 2130772090;
 			
@@ -953,32 +959,32 @@ namespace SoundFontProvider
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f090043
-			public const int abc_background_cache_hint_selector_material_dark = 2131296323;
-			
-			// aapt resource value: 0x7f090044
-			public const int abc_background_cache_hint_selector_material_light = 2131296324;
-			
 			// aapt resource value: 0x7f090045
-			public const int abc_color_highlight_material = 2131296325;
+			public const int abc_background_cache_hint_selector_material_dark = 2131296325;
+			
+			// aapt resource value: 0x7f090046
+			public const int abc_background_cache_hint_selector_material_light = 2131296326;
+			
+			// aapt resource value: 0x7f090047
+			public const int abc_color_highlight_material = 2131296327;
 			
 			// aapt resource value: 0x7f090009
 			public const int abc_input_method_navigation_guard = 2131296265;
 			
-			// aapt resource value: 0x7f090046
-			public const int abc_primary_text_disable_only_material_dark = 2131296326;
-			
-			// aapt resource value: 0x7f090047
-			public const int abc_primary_text_disable_only_material_light = 2131296327;
-			
 			// aapt resource value: 0x7f090048
-			public const int abc_primary_text_material_dark = 2131296328;
+			public const int abc_primary_text_disable_only_material_dark = 2131296328;
 			
 			// aapt resource value: 0x7f090049
-			public const int abc_primary_text_material_light = 2131296329;
+			public const int abc_primary_text_disable_only_material_light = 2131296329;
 			
 			// aapt resource value: 0x7f09004a
-			public const int abc_search_url_text = 2131296330;
+			public const int abc_primary_text_material_dark = 2131296330;
+			
+			// aapt resource value: 0x7f09004b
+			public const int abc_primary_text_material_light = 2131296331;
+			
+			// aapt resource value: 0x7f09004c
+			public const int abc_search_url_text = 2131296332;
 			
 			// aapt resource value: 0x7f09000a
 			public const int abc_search_url_text_normal = 2131296266;
@@ -989,11 +995,11 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f09000c
 			public const int abc_search_url_text_selected = 2131296268;
 			
-			// aapt resource value: 0x7f09004b
-			public const int abc_secondary_text_material_dark = 2131296331;
+			// aapt resource value: 0x7f09004d
+			public const int abc_secondary_text_material_dark = 2131296333;
 			
-			// aapt resource value: 0x7f09004c
-			public const int abc_secondary_text_material_light = 2131296332;
+			// aapt resource value: 0x7f09004e
+			public const int abc_secondary_text_material_light = 2131296334;
 			
 			// aapt resource value: 0x7f09000d
 			public const int accent_material_dark = 2131296269;
@@ -1130,6 +1136,12 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f090030
 			public const int material_grey_900 = 2131296304;
 			
+			// aapt resource value: 0x7f090043
+			public const int nnf_dark_separator_color = 2131296323;
+			
+			// aapt resource value: 0x7f090044
+			public const int nnf_light_separator_color = 2131296324;
+			
 			// aapt resource value: 0x7f090031
 			public const int primary_dark_material_dark = 2131296305;
 			
@@ -1178,11 +1190,11 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f090040
 			public const int switch_thumb_disabled_material_light = 2131296320;
 			
-			// aapt resource value: 0x7f09004d
-			public const int switch_thumb_material_dark = 2131296333;
+			// aapt resource value: 0x7f09004f
+			public const int switch_thumb_material_dark = 2131296335;
 			
-			// aapt resource value: 0x7f09004e
-			public const int switch_thumb_material_light = 2131296334;
+			// aapt resource value: 0x7f090050
+			public const int switch_thumb_material_light = 2131296336;
 			
 			// aapt resource value: 0x7f090041
 			public const int switch_thumb_normal_material_dark = 2131296321;
@@ -1742,7 +1754,13 @@ namespace SoundFontProvider
 			public const int design_snackbar_background = 2130837574;
 			
 			// aapt resource value: 0x7f020047
-			public const int notification_template_icon_bg = 2130837575;
+			public const int nnf_ic_collections_add_collection = 2130837575;
+			
+			// aapt resource value: 0x7f020048
+			public const int nnf_ic_file_folder = 2130837576;
+			
+			// aapt resource value: 0x7f020049
+			public const int notification_template_icon_bg = 2130837577;
 			
 			static Drawable()
 			{
@@ -1757,8 +1775,8 @@ namespace SoundFontProvider
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0077
-			public const int action0 = 2131361911;
+			// aapt resource value: 0x7f0a0081
+			public const int action0 = 2131361921;
 			
 			// aapt resource value: 0x7f0a005a
 			public const int action_bar = 2131361882;
@@ -1784,8 +1802,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a005b
 			public const int action_context_bar = 2131361883;
 			
-			// aapt resource value: 0x7f0a007b
-			public const int action_divider = 2131361915;
+			// aapt resource value: 0x7f0a0085
+			public const int action_divider = 2131361925;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int action_menu_divider = 2131361796;
@@ -1820,8 +1838,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0044
 			public const int buttonPanel = 2131361860;
 			
-			// aapt resource value: 0x7f0a0078
-			public const int cancel_action = 2131361912;
+			// aapt resource value: 0x7f0a0082
+			public const int cancel_action = 2131361922;
 			
 			// aapt resource value: 0x7f0a0014
 			public const int center = 2131361812;
@@ -1835,8 +1853,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0052
 			public const int checkbox = 2131361874;
 			
-			// aapt resource value: 0x7f0a007e
-			public const int chronometer = 2131361918;
+			// aapt resource value: 0x7f0a0088
+			public const int chronometer = 2131361928;
 			
 			// aapt resource value: 0x7f0a001d
 			public const int clip_horizontal = 2131361821;
@@ -1877,14 +1895,20 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0027
 			public const int disableHome = 2131361831;
 			
+			// aapt resource value: 0x7f0a0080
+			public const int divider = 2131361920;
+			
 			// aapt resource value: 0x7f0a005c
 			public const int edit_query = 2131361884;
+			
+			// aapt resource value: 0x7f0a0078
+			public const int edit_text = 2131361912;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int end = 2131361815;
 			
-			// aapt resource value: 0x7f0a0083
-			public const int end_padder = 2131361923;
+			// aapt resource value: 0x7f0a008d
+			public const int end_padder = 2131361933;
 			
 			// aapt resource value: 0x7f0a000b
 			public const int enterAlways = 2131361803;
@@ -1913,6 +1937,9 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0023
 			public const int @fixed = 2131361827;
 			
+			// aapt resource value: 0x7f0a0077
+			public const int fragment = 2131361911;
+			
 			// aapt resource value: 0x7f0a0006
 			public const int home = 2131361798;
 			
@@ -1928,8 +1955,11 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a003f
 			public const int image = 2131361855;
 			
-			// aapt resource value: 0x7f0a0082
-			public const int info = 2131361922;
+			// aapt resource value: 0x7f0a008c
+			public const int info = 2131361932;
+			
+			// aapt resource value: 0x7f0a007b
+			public const int item_icon = 2131361915;
 			
 			// aapt resource value: 0x7f0a0001
 			public const int item_touch_helper_previous_elevation = 2131361793;
@@ -1937,11 +1967,11 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0019
 			public const int left = 2131361817;
 			
-			// aapt resource value: 0x7f0a007c
-			public const int line1 = 2131361916;
+			// aapt resource value: 0x7f0a0086
+			public const int line1 = 2131361926;
 			
-			// aapt resource value: 0x7f0a0080
-			public const int line3 = 2131361920;
+			// aapt resource value: 0x7f0a008a
+			public const int line3 = 2131361930;
 			
 			// aapt resource value: 0x7f0a0025
 			public const int listMode = 2131361829;
@@ -1970,8 +2000,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0072
 			public const int mainViewPager = 2131361906;
 			
-			// aapt resource value: 0x7f0a007a
-			public const int media_actions = 2131361914;
+			// aapt resource value: 0x7f0a0084
+			public const int media_actions = 2131361924;
 			
 			// aapt resource value: 0x7f0a0033
 			public const int middle = 2131361843;
@@ -1985,14 +2015,35 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a006b
 			public const int navigation_header_container = 2131361899;
 			
-			// aapt resource value: 0x7f0a0088
-			public const int navigation_item_1 = 2131361928;
+			// aapt resource value: 0x7f0a0092
+			public const int navigation_item_1 = 2131361938;
 			
-			// aapt resource value: 0x7f0a0089
-			public const int navigation_item_2 = 2131361929;
+			// aapt resource value: 0x7f0a0093
+			public const int navigation_item_2 = 2131361939;
 			
 			// aapt resource value: 0x7f0a0037
 			public const int never = 2131361847;
+			
+			// aapt resource value: 0x7f0a0094
+			public const int nnf_action_createdir = 2131361940;
+			
+			// aapt resource value: 0x7f0a007a
+			public const int nnf_button_cancel = 2131361914;
+			
+			// aapt resource value: 0x7f0a007f
+			public const int nnf_button_container = 2131361919;
+			
+			// aapt resource value: 0x7f0a007c
+			public const int nnf_button_ok = 2131361916;
+			
+			// aapt resource value: 0x7f0a007e
+			public const int nnf_current_dir = 2131361918;
+			
+			// aapt resource value: 0x7f0a0079
+			public const int nnf_item_container = 2131361913;
+			
+			// aapt resource value: 0x7f0a007d
+			public const int nnf_picker_toolbar = 2131361917;
 			
 			// aapt resource value: 0x7f0a0010
 			public const int none = 2131361808;
@@ -2093,17 +2144,17 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a000f
 			public const int snap = 2131361807;
 			
-			// aapt resource value: 0x7f0a0086
-			public const int soundFontDetailFileInfoLabel = 2131361926;
+			// aapt resource value: 0x7f0a0090
+			public const int soundFontDetailFileInfoLabel = 2131361936;
 			
-			// aapt resource value: 0x7f0a0087
-			public const int soundFontDetailFileInfoValue = 2131361927;
+			// aapt resource value: 0x7f0a0091
+			public const int soundFontDetailFileInfoValue = 2131361937;
 			
-			// aapt resource value: 0x7f0a0085
-			public const int soundFontDetailsBankList = 2131361925;
+			// aapt resource value: 0x7f0a008f
+			public const int soundFontDetailsBankList = 2131361935;
 			
-			// aapt resource value: 0x7f0a0084
-			public const int soundFontDetailsFileInfo = 2131361924;
+			// aapt resource value: 0x7f0a008e
+			public const int soundFontDetailsFileInfo = 2131361934;
 			
 			// aapt resource value: 0x7f0a0045
 			public const int spacer = 2131361861;
@@ -2123,8 +2174,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a001b
 			public const int start = 2131361819;
 			
-			// aapt resource value: 0x7f0a0079
-			public const int status_bar_latest_event_content = 2131361913;
+			// aapt resource value: 0x7f0a0083
+			public const int status_bar_latest_event_content = 2131361923;
 			
 			// aapt resource value: 0x7f0a0065
 			public const int submit_area = 2131361893;
@@ -2132,17 +2183,17 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0026
 			public const int tabMode = 2131361830;
 			
-			// aapt resource value: 0x7f0a0081
-			public const int text = 2131361921;
+			// aapt resource value: 0x7f0a008b
+			public const int text = 2131361931;
 			
-			// aapt resource value: 0x7f0a007f
-			public const int text2 = 2131361919;
+			// aapt resource value: 0x7f0a0089
+			public const int text2 = 2131361929;
 			
 			// aapt resource value: 0x7f0a004d
 			public const int textSpacerNoButtons = 2131361869;
 			
-			// aapt resource value: 0x7f0a007d
-			public const int time = 2131361917;
+			// aapt resource value: 0x7f0a0087
+			public const int time = 2131361927;
 			
 			// aapt resource value: 0x7f0a0043
 			public const int title = 2131361859;
@@ -2150,8 +2201,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0a0048
 			public const int title_template = 2131361864;
 			
-			// aapt resource value: 0x7f0a008a
-			public const int toolbar_addnewfolder = 2131361930;
+			// aapt resource value: 0x7f0a0095
+			public const int toolbar_addnewfolder = 2131361941;
 			
 			// aapt resource value: 0x7f0a001c
 			public const int top = 2131361820;
@@ -2342,46 +2393,61 @@ namespace SoundFontProvider
 			public const int MainSoundFontListItem = 2130968616;
 			
 			// aapt resource value: 0x7f040029
-			public const int notification_media_action = 2130968617;
+			public const int nnf_activity_filepicker = 2130968617;
 			
 			// aapt resource value: 0x7f04002a
-			public const int notification_media_cancel_action = 2130968618;
+			public const int nnf_dialog_folder_name = 2130968618;
 			
 			// aapt resource value: 0x7f04002b
-			public const int notification_template_big_media = 2130968619;
+			public const int nnf_filepicker_listitem_checkable = 2130968619;
 			
 			// aapt resource value: 0x7f04002c
-			public const int notification_template_big_media_narrow = 2130968620;
+			public const int nnf_filepicker_listitem_dir = 2130968620;
 			
 			// aapt resource value: 0x7f04002d
-			public const int notification_template_lines = 2130968621;
+			public const int nnf_fragment_filepicker = 2130968621;
 			
 			// aapt resource value: 0x7f04002e
-			public const int notification_template_media = 2130968622;
+			public const int notification_media_action = 2130968622;
 			
 			// aapt resource value: 0x7f04002f
-			public const int notification_template_part_chronometer = 2130968623;
+			public const int notification_media_cancel_action = 2130968623;
 			
 			// aapt resource value: 0x7f040030
-			public const int notification_template_part_time = 2130968624;
+			public const int notification_template_big_media = 2130968624;
 			
 			// aapt resource value: 0x7f040031
-			public const int select_dialog_item_material = 2130968625;
+			public const int notification_template_big_media_narrow = 2130968625;
 			
 			// aapt resource value: 0x7f040032
-			public const int select_dialog_multichoice_material = 2130968626;
+			public const int notification_template_lines = 2130968626;
 			
 			// aapt resource value: 0x7f040033
-			public const int select_dialog_singlechoice_material = 2130968627;
+			public const int notification_template_media = 2130968627;
 			
 			// aapt resource value: 0x7f040034
-			public const int SoundFontDetails = 2130968628;
+			public const int notification_template_part_chronometer = 2130968628;
 			
 			// aapt resource value: 0x7f040035
-			public const int SoundFontFileInfoItem = 2130968629;
+			public const int notification_template_part_time = 2130968629;
 			
 			// aapt resource value: 0x7f040036
-			public const int support_simple_spinner_dropdown_item = 2130968630;
+			public const int select_dialog_item_material = 2130968630;
+			
+			// aapt resource value: 0x7f040037
+			public const int select_dialog_multichoice_material = 2130968631;
+			
+			// aapt resource value: 0x7f040038
+			public const int select_dialog_singlechoice_material = 2130968632;
+			
+			// aapt resource value: 0x7f040039
+			public const int SoundFontDetails = 2130968633;
+			
+			// aapt resource value: 0x7f04003a
+			public const int SoundFontFileInfoItem = 2130968634;
+			
+			// aapt resource value: 0x7f04003b
+			public const int support_simple_spinner_dropdown_item = 2130968635;
 			
 			static Layout()
 			{
@@ -2400,7 +2466,10 @@ namespace SoundFontProvider
 			public const int drawer = 2131558400;
 			
 			// aapt resource value: 0x7f0d0001
-			public const int toolbar = 2131558401;
+			public const int picker_actions = 2131558401;
+			
+			// aapt resource value: 0x7f0d0002
+			public const int toolbar = 2131558402;
 			
 			static Menu()
 			{
@@ -2488,8 +2557,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0b0014
 			public const int abc_toolbar_collapse_description = 2131427348;
 			
-			// aapt resource value: 0x7f0b0018
-			public const int app_name = 2131427352;
+			// aapt resource value: 0x7f0b001d
+			public const int app_name = 2131427357;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int appbar_scrolling_view_behavior = 2131427328;
@@ -2497,11 +2566,26 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0b0001
 			public const int character_counter_pattern = 2131427329;
 			
-			// aapt resource value: 0x7f0b0017
-			public const int hello = 2131427351;
+			// aapt resource value: 0x7f0b001c
+			public const int hello = 2131427356;
+			
+			// aapt resource value: 0x7f0b001b
+			public const int library_name = 2131427355;
 			
 			// aapt resource value: 0x7f0b0016
-			public const int library_name = 2131427350;
+			public const int nnf_create_folder_error = 2131427350;
+			
+			// aapt resource value: 0x7f0b0017
+			public const int nnf_name = 2131427351;
+			
+			// aapt resource value: 0x7f0b0018
+			public const int nnf_new_folder = 2131427352;
+			
+			// aapt resource value: 0x7f0b0019
+			public const int nnf_permission_external_write_denied = 2131427353;
+			
+			// aapt resource value: 0x7f0b001a
+			public const int nnf_select_something_first = 2131427354;
 			
 			// aapt resource value: 0x7f0b0015
 			public const int status_bar_notification_info_overflow = 2131427349;
@@ -2954,6 +3038,18 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f060001
 			public const int Base_Widget_Design_TabLayout = 2131099649;
 			
+			// aapt resource value: 0x7f060148
+			public const int FilePickerAlertDialogTheme = 2131099976;
+			
+			// aapt resource value: 0x7f060147
+			public const int FilePickerTheme = 2131099975;
+			
+			// aapt resource value: 0x7f060144
+			public const int NNF_BaseTheme = 2131099972;
+			
+			// aapt resource value: 0x7f060145
+			public const int NNF_BaseTheme_Light = 2131099973;
+			
 			// aapt resource value: 0x7f060021
 			public const int Platform_AppCompat = 2131099681;
 			
@@ -3245,8 +3341,8 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0600fa
 			public const int Theme_AppCompat_NoActionBar = 2131099898;
 			
-			// aapt resource value: 0x7f060144
-			public const int Theme_Styled = 2131099972;
+			// aapt resource value: 0x7f060146
+			public const int Theme_Styled = 2131099974;
 			
 			// aapt resource value: 0x7f0600fb
 			public const int ThemeOverlay_AppCompat = 2131099899;

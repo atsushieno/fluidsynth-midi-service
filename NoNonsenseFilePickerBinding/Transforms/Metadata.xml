@@ -1,0 +1,14 @@
+﻿<metadata>
+	<!--
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='getFullPath']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='getName']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='getParent']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='getPath']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='isDir']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/method[@name='toUri']/parameter[1]" name="managedType">Java.Lang.Object</attr>
+	-->
+  <attr path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='FilePickerFragment']/method[@name='getRoot' and count(parameter)=0]" name="managedReturn">Java.Lang.Object</attr>
+  <remove-node path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='FilePickerFragment']/method[@name='getPath']" />
+  <remove-node path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='FilePickerFragment']/method[@name='getRoot']" />
+  <remove-node path="/api/package[@name='com.nononsenseapps.filepicker']/class[@name='AbstractFilePickerFragment']/implements[@name='com.nononsenseapps.filepicker.LogicHandler']" />
+</metadata>

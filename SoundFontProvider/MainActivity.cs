@@ -16,6 +16,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Runtime;
 using Android.Support.V7.App;
+using Com.Nononsenseapps.Filepicker;
 
 namespace SoundFontProvider
 {
@@ -64,13 +65,32 @@ namespace SoundFontProvider
 			toolbar.InflateMenu (Resource.Menu.toolbar);
 			toolbar.MenuItemClick += (sender, e) => {
 				if (e.Item.ItemId == Resource.Id.toolbar_addnewfolder) {
-					var df = new FolderChooserDialogFragment ();
-					df.Show (SupportFragmentManager, "FolderChooser");
-				}
+					//var df = new FolderChooserDialogFragment ();
+					//df.Show (SupportFragmentManager, "FolderChooser");
+					Intent i = new Intent (this, typeof (FilePickerActivity));
+
+					i.PutExtra (FilePickerActivity.ExtraMode, FilePickerActivity.ModeDir);
+
+					// Configure initial directory by specifying a String.
+					// You could specify a String like "/storage/emulated/0/", but that can
+					// dangerous. Always use Android's API calls to get paths to the SD-card or
+					// internal memory.
+					i.PutExtra (FilePickerActivity.ExtraStartPath, Android.OS.Environment.ExternalStorageDirectory.Path);
+
+					StartActivityForResult (i, 1234);				}
 			};
 
 			var tabl = FindViewById<TabLayout> (Resource.Id.mainTabLayout);
 			tabl.SetupWithViewPager (vp);
+		}
+
+		protected override void OnActivityResult (int requestCode, Result resultCode, Intent data)
+		{
+			if (requestCode == 1234 && resultCode == Result.Ok) {
+				if (Directory.Exists (data.Data.Path))
+					ApplicationModel.Instance.AddSearchPaths (data.Data.Path);
+			}
+			base.OnActivityResult (requestCode, resultCode, data);
 		}
 
 		class FolderChooserDialogFragment : Android.Support.V4.App.DialogFragment
