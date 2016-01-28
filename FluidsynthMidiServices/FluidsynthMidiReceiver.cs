@@ -16,6 +16,8 @@ namespace FluidsynthMidiServices
 {
 	class FluidsynthMidiReceiver : MidiReceiver
 	{
+		const string predefined_temp_path = "/data/local/tmp/name.atsushieno.fluidsynthmidideviceservice";
+
 		public FluidsynthMidiReceiver (Context context)
 		{
 #if MIDI_MANAGER
@@ -68,10 +70,14 @@ namespace FluidsynthMidiServices
 		
 		void LoadDefaultSoundFontSpecial (Context context, Synth synth)
 		{
-			string sf2Dir = Path.Combine (context.ObbDir.AbsolutePath);
-			if (Directory.Exists (sf2Dir))
-				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+			if (context.ObbDir != null && Directory.Exists (context.ObbDir.AbsolutePath))
+				foreach (var obbSf2 in Directory.GetFiles (context.ObbDir.AbsolutePath, "*.sf2", SearchOption.AllDirectories))
 					synth.LoadSoundFont (obbSf2, true);
+#if true// DEBUG
+			if (Directory.Exists (FluidsynthMidiReceiver.predefined_temp_path))
+				foreach (var obbSf2 in Directory.GetFiles (FluidsynthMidiReceiver.predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
+					synth.LoadSoundFont (obbSf2, true);
+#endif
 		}
 
 		protected override void Dispose (bool disposing)

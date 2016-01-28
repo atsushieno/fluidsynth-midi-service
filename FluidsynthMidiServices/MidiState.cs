@@ -15,7 +15,7 @@ namespace FluidsynthMidiServices
 {
 	public class MidiState
 	{
-		const string predefined_temp_path = "/data/local/tmp/name.atsushieno.soundfontprovider";
+		const string predefined_temp_path = "/data/local/tmp/name.atsushieno.fluidsynthmidideviceservice";
 
 		IMidiAccess acc;
 		IMidiOutput output;
@@ -66,7 +66,7 @@ namespace FluidsynthMidiServices
 			if (sf2Dir != null && Directory.Exists (sf2Dir))
 				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
 					acc.Soundfonts.Add (sf2);
-#if DEBUG
+#if true//DEBUG
 			foreach (var sf2 in Directory.GetFiles (predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
 				if (!acc.Soundfonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
 					acc.Soundfonts.Add (sf2);
