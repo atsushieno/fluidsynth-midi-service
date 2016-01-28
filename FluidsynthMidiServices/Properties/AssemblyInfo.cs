@@ -26,6 +26,6 @@ using Android.App;
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
 
-[assembly:UsesFeature (Android.Content.PM.PackageManager.FeatureMidi)]
+[assembly:UsesFeature (Android.Content.PM.PackageManager.FeatureMidi, Required = false)]
 [assembly:UsesPermission (Android.Manifest.Permission.BindMidiDeviceService)]
 [assembly:UsesPermission (Android.Manifest.Permission.ReadExternalStorage)]
