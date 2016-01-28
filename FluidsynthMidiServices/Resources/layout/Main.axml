@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
     <Button
         android:id="@+id/openFreeStylePad"
         android:layout_width="match_parent"
@@ -23,6 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="play song" />
+    <Button
+        android:id="@+id/playMML"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="play MML" />
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
@@ -32,9 +38,4 @@
         android:breakStrategy="simple"
         android:typeface="monospace"
         android:hint="edit MML here and tap play MML button" />
-    <Button
-        android:id="@+id/playMML"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="play MML" />
 </LinearLayout>

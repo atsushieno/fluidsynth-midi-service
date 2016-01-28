@@ -62,8 +62,8 @@ namespace FluidsynthMidiServices
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060004
-			public const int editText = 2131099652;
+			// aapt resource value: 0x7f060005
+			public const int editText = 2131099653;
 			
 			// aapt resource value: 0x7f060007
 			public const int mainSurface = 2131099655;
@@ -74,8 +74,8 @@ namespace FluidsynthMidiServices
 			// aapt resource value: 0x7f060001
 			public const int playChord = 2131099649;
 			
-			// aapt resource value: 0x7f060005
-			public const int playMML = 2131099653;
+			// aapt resource value: 0x7f060004
+			public const int playMML = 2131099652;
 			
 			// aapt resource value: 0x7f060003
 			public const int playSong = 2131099651;
