@@ -15,6 +15,8 @@ namespace FluidsynthMidiServices
 {
 	public class MidiState
 	{
+		const string predefined_temp_path = "/data/local/tmp/name.atsushieno.soundfontprovider";
+
 		IMidiAccess acc;
 		IMidiOutput output;
 		
@@ -60,10 +62,15 @@ namespace FluidsynthMidiServices
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
 			};
-			string sf2Dir = Path.Combine (context.ObbDir.AbsolutePath);
-			if (Directory.Exists (sf2Dir))
-				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
-					acc.Soundfonts.Add (obbSf2);
+			string sf2Dir = context.ObbDir != null ? Path.Combine (context.ObbDir.AbsolutePath) : null;
+			if (sf2Dir != null && Directory.Exists (sf2Dir))
+				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+					acc.Soundfonts.Add (sf2);
+#if DEBUG
+			foreach (var sf2 in Directory.GetFiles (predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
+				if (!acc.Soundfonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
+					acc.Soundfonts.Add (sf2);
+#endif
 #endif
 		}
 	}
