@@ -67,9 +67,10 @@ namespace FluidsynthMidiServices
 				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
 					acc.Soundfonts.Add (sf2);
 #if true//DEBUG
-			foreach (var sf2 in Directory.GetFiles (predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
-				if (!acc.Soundfonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
-					acc.Soundfonts.Add (sf2);
+			if (Directory.Exists (predefined_temp_path))
+				foreach (var sf2 in Directory.GetFiles (predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
+					if (!acc.Soundfonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
+						acc.Soundfonts.Add (sf2);
 #endif
 #endif
 		}
