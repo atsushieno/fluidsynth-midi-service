@@ -40,8 +40,6 @@ namespace SoundFontProvider
 				e.Commit ();
 			});
 
-			if (ObbDir != null && !model.Settings.SearchPaths.Contains (ObbDir.AbsolutePath))
-				model.AddSearchPaths (ObbDir.AbsolutePath);
 #if DEBUG
 			if (!model.Settings.SearchPaths.Contains (predefined_temp_path))
 				model.AddSearchPaths (predefined_temp_path);
