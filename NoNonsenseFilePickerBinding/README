@@ -1,0 +1,6 @@
+This directory contains a very simple build script to build
+NoNonsenseFilePicker and bindings.
+The Java library is at https://github.com/spacecowboy/NoNonsense-FilePicker
+
+The binding project and the git repo already contains a prebuilt binary
+so that it does not have to be part of the entire build.
