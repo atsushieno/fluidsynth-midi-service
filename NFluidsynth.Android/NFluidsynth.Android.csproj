@@ -13,13 +13,14 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AssemblyName>NFluidsynth.Android</AssemblyName>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;ANDROID</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
@@ -49,7 +50,7 @@
     <AndroidStoreUncompressedFileExtensions></AndroidStoreUncompressedFileExtensions>
     <MandroidI18n></MandroidI18n>
     <AndroidSupportedAbis></AndroidSupportedAbis>
-    <EmbedAssembliesIntoApk></EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -124,6 +125,12 @@
       <Link>NFluidsynth\generator\ConfigurationKeys.cs</Link>
     </Compile>
     <None Include="Resources\AboutResources.txt" />
+    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\SoundFontLoader.cs">
+      <Link>NFluidsynth\NFluidsynth\SoundFontLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\StreamLoader.cs">
+      <Link>NFluidsynth\NFluidsynth\StreamLoader.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\" />
