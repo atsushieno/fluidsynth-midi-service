@@ -1,5 +1,6 @@
 //#define MIDI_MANAGER
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Android.Media.Midi;
@@ -54,7 +55,13 @@ namespace FluidsynthMidiServices
 			output = access.OpenOutputAsync (access.Outputs.First ().Id).Result;
 #else
 			syn = new Synth (settings);
-			LoadDefaultSoundFontSpecial (context, syn);
+			asset_stream_loader = new AndroidAssetStreamLoader (context.Assets);
+			asset_sfloader = new SoundFontLoader (syn, asset_stream_loader);
+			syn.AddSoundFontLoader (asset_sfloader);
+			var sfs = new List<string> ();
+			SynthAndroidExtensions.LoadSoundFontSpecial (sfs, context, predefined_temp_path);
+			foreach (var sf in sfs)
+				syn.LoadSoundFont (sf, false);
 
 			adriver = new AudioDriver (syn.Settings, syn);
 #endif
@@ -66,25 +73,19 @@ namespace FluidsynthMidiServices
 #else
 		Synth syn;
 		AudioDriver adriver;
+		AndroidAssetStreamLoader asset_stream_loader;
+		SoundFontLoader asset_sfloader;
 #endif
-		
-		void LoadDefaultSoundFontSpecial (Context context, Synth synth)
-		{
-			if (context.ObbDir != null && Directory.Exists (context.ObbDir.AbsolutePath))
-				foreach (var obbSf2 in Directory.GetFiles (context.ObbDir.AbsolutePath, "*.sf2", SearchOption.AllDirectories))
-					synth.LoadSoundFont (obbSf2, true);
-#if true// DEBUG
-			if (Directory.Exists (FluidsynthMidiReceiver.predefined_temp_path))
-				foreach (var obbSf2 in Directory.GetFiles (FluidsynthMidiReceiver.predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
-					synth.LoadSoundFont (obbSf2, true);
-#endif
-		}
 
 		protected override void Dispose (bool disposing)
 		{
 #if MIDI_MANAGER
 #else
 			if (disposing) {
+				if (asset_sfloader != null)
+					asset_sfloader.Dispose ();
+				if (asset_stream_loader != null)
+					asset_stream_loader.Dispose ();
 				adriver.Dispose ();
 				syn.Dispose ();
 			}

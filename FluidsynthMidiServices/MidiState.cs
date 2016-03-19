@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -62,19 +63,34 @@ namespace FluidsynthMidiServices
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
 			};
-			string sf2Dir = context.ObbDir != null ? Path.Combine (context.ObbDir.AbsolutePath) : null;
-			if (sf2Dir != null && Directory.Exists (sf2Dir))
-				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
-					acc.Soundfonts.Add (sf2);
-#if true//DEBUG
-			if (Directory.Exists (predefined_temp_path))
-				foreach (var sf2 in Directory.GetFiles (predefined_temp_path, "*.sf2", SearchOption.AllDirectories))
-					if (!acc.Soundfonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
-						acc.Soundfonts.Add (sf2);
-#endif
+			acc.SoundFontLoaderFactories.Add (syn => new SoundFontLoader (syn, new AndroidAssetStreamLoader (context.Assets)));
+			SynthAndroidExtensions.LoadSoundFontSpecial (acc.SoundFonts, context, predefined_temp_path);
 #endif
 		}
 	}
+
+	static class SynthAndroidExtensions
+	{
+		public static void LoadSoundFontSpecial (IList<string> soundFonts, Context context, string predefinedTempPath)
+		{
+			/*
+			string sf2Dir = context.ObbDir != null ? Path.Combine (context.ObbDir.AbsolutePath) : null;
+			if (sf2Dir != null && Directory.Exists (sf2Dir))
+				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
+					soundFonts.Add (sf2);
+			*/
+			foreach (var asset in context.Assets.List (""))
+				if (asset.EndsWith (".sf2", StringComparison.OrdinalIgnoreCase))
+					soundFonts.Add (asset);
+#if true//DEBUG
+			if (Directory.Exists (predefinedTempPath))
+				foreach (var sf2 in Directory.GetFiles (predefinedTempPath, "*.sf2", SearchOption.AllDirectories))
+					if (!soundFonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
+						soundFonts.Add (sf2);
+#endif
+		}
+	}
+
 
 	class AssetOrUrlResolver : StreamResolver
 	{
