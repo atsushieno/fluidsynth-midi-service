@@ -6,6 +6,7 @@ using System.Net.Http;
 using Android.Content;
 using Android.Media;
 using Android.Media.Midi;
+using Android.OS.Storage;
 using Android.Runtime;
 using Commons.Music.Midi;
 using Commons.Music.Midi.Mml;
@@ -69,20 +70,37 @@ namespace FluidsynthMidiServices
 		}
 	}
 
+	class ObbListener : OnObbStateChangeListener
+	{
+		public override void OnObbStateChange (string path, ObbState state)
+		{
+			// dummy receiver
+		}
+	}
+
 	static class SynthAndroidExtensions
 	{
 		public static void LoadSoundFontSpecial (IList<string> soundFonts, Context context, string predefinedTempPath)
 		{
-			/*
-			string sf2Dir = context.ObbDir != null ? Path.Combine (context.ObbDir.AbsolutePath) : null;
-			if (sf2Dir != null && Directory.Exists (sf2Dir))
-				foreach (var sf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
-					soundFonts.Add (sf2);
-			*/
+			// OBB support
+			var obbMgr = context.GetSystemService (Context.StorageService).JavaCast<StorageManager> ();
+			if ((int) Android.OS.Build.VERSION.SdkInt >= (int) Android.OS.BuildVersionCodes.Kitkat) {
+				var obbs = context.GetObbDirs ().SelectMany (d => Directory.GetFiles (d.Path, "*.obb"));
+				foreach (var obbDir in obbs) {
+					if (!obbMgr.IsObbMounted (obbDir))
+						obbMgr.MountObb (obbDir, null, new ObbListener ());
+				}
+				foreach (var obbDir in obbs.Where (d => obbMgr.IsObbMounted (d)).Select (d => obbMgr.GetMountedObbPath (d)))
+					foreach (var sf2 in Directory.GetFiles (obbDir, "*.sf2", SearchOption.AllDirectories))
+						soundFonts.Add (sf2);
+			}
+
+			// Assets
 			foreach (var asset in context.Assets.List (""))
 				if (asset.EndsWith (".sf2", StringComparison.OrdinalIgnoreCase))
 					soundFonts.Add (asset);
 #if true//DEBUG
+			// temporary local files for debugging
 			if (Directory.Exists (predefinedTempPath))
 				foreach (var sf2 in Directory.GetFiles (predefinedTempPath, "*.sf2", SearchOption.AllDirectories))
 					if (!soundFonts.Any (_ => Path.GetFileName (_) == Path.GetFileName (sf2)))
