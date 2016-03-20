@@ -23,6 +23,8 @@ namespace FluidsynthMidiServices
 		
 		const int pad_size_denom = 10;
 		const int round_size_denom = 16;
+		const int num_cols = 8;
+		const int num_rows = 8;
 		
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -57,8 +59,8 @@ namespace FluidsynthMidiServices
 					var padding = size / pad_size_denom;
 					var x = index < 0 ? e.Event.GetX () : e.Event.GetX (index);
 					var y = index < 0 ? e.Event.GetY () : e.Event.GetY (index);
-					if (padding <= x && x < padding * size - padding * 2 &&
-					    padding <= y && y < padding * size - padding * 2) {
+					if (padding <= x && x < num_cols * size - padding * 2 &&
+					    padding <= y && y < num_rows * size - padding * 2) {
 						int h = (int) ((x - padding) / size);
 						int v = (int) ((y - padding) / size);
 						var output = MidiState.Instance.GetMidiOutput (this);
@@ -87,9 +89,9 @@ namespace FluidsynthMidiServices
 			int round = size / round_size_denom;
 			var canvas = holder.LockCanvas ();
 			var paint = new Paint () { Color = Color.White, StrokeWidth = 2 };
-			size = Math.Min (canvas.Width, canvas.Height) / 8;
-			for (int v = 0; v < 8; v++)
-				for (int h = 0; h < 8; h++)
+			size = (int) Math.Min (canvas.Width / num_cols, canvas.Height / num_rows);
+			for (int v = 0; v < num_cols; v++)
+				for (int h = 0; h < num_rows; h++)
 					canvas.DrawRoundRect (padding + h * size, padding + v * size, (h + 1) * size - 2 * padding, (v + 1) * size - 2 * padding, round, round, paint);
 			holder.UnlockCanvasAndPost (canvas);
 		}
