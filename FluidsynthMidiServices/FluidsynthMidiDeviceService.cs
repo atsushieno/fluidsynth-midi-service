@@ -14,19 +14,19 @@ namespace FluidsynthMidiServices
 		// default constructor for normal service instance
 		public FluidsynthMidiDeviceService ()
 		{
-			if (fluidsynth_receiver == null)
-				fluidsynth_receiver = new FluidsynthMidiReceiver (this);
+			MidiState.Instance.MountObbs (this);
 		}
 
 		FluidsynthMidiReceiver fluidsynth_receiver;
 
 		public override void OnCreate ()
 		{
-			fluidsynth_receiver = new FluidsynthMidiReceiver (this);
 		}
 
 		public override MidiReceiver[] OnGetInputPortReceivers ()
 		{
+			if (fluidsynth_receiver == null || fluidsynth_receiver.IsDisposed)
+				fluidsynth_receiver = new FluidsynthMidiReceiver (this);
 			return new MidiReceiver [] {fluidsynth_receiver };
 		}
 	}

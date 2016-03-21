@@ -21,7 +21,6 @@ namespace FluidsynthMidiServices
 
 		public FluidsynthMidiReceiver (Context context)
 		{
-			MidiState.Instance.MountObbs (context);
 #if MIDI_MANAGER
 			access = new FluidsynthMidiAccess ();
 			access.ConfigureSettings = (settings) => {
@@ -75,6 +74,7 @@ namespace FluidsynthMidiServices
 		AndroidAssetStreamLoader asset_stream_loader;
 		SoundFontLoader asset_sfloader;
 #endif
+		public bool IsDisposed { get; private set; }
 
 		protected override void Dispose (bool disposing)
 		{
@@ -87,6 +87,7 @@ namespace FluidsynthMidiServices
 					asset_stream_loader.Dispose ();
 				adriver.Dispose ();
 				syn.Dispose ();
+				IsDisposed = true;
 			}
 #endif
 			base.Dispose (disposing);
