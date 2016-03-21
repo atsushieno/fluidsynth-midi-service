@@ -14,8 +14,8 @@ using Commons.Music.Midi.Mml;
 
 namespace FluidsynthMidiServices
 {
-	[Activity (Label = "FluidsynthMidiServices", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
+	[Activity (Label = "FluidsynthMidiServices", MainLauncher = true, Icon = "@mipmap/icon")]
+	public class PlaygroundsMainActivity : Activity
 	{
 		FluidsynthMidiReceiver recv;
 		
@@ -25,12 +25,16 @@ namespace FluidsynthMidiServices
 		{
 			base.OnCreate (bundle);
 
-			SetContentView (Resource.Layout.Main);
+			SetContentView (Resource.Layout.PlaygroundsMain);
 			
+			FindViewById<Button> (Resource.Id.openSoundFontManager).Click += delegate {
+				this.StartActivity (new Intent (this, typeof (SoundFontProvider.SoundFontProviderMainActivity)));
+			};
+
 			FindViewById<Button> (Resource.Id.openFreeStylePad).Click += delegate {
 				this.StartActivity (new Intent (this, typeof (RhythmPadActivity)));
 			};
-			
+
 			var playChordButton = FindViewById<Button> (Resource.Id.playChord);
 			bool noteOn = false;
 			if (Android.OS.Build.VERSION.SdkInt < BuildVersionCodes.M)
@@ -104,6 +108,13 @@ namespace FluidsynthMidiServices
 
 			// Mount OBBs at bootstrap.
 			MidiState.Instance.MountObbs (this);
+		}
+
+		protected override void OnDestroy ()
+		{
+			if (recv != null)
+				recv.Close ();
+			base.OnDestroy ();
 		}
 		
 		SmfMusic GetSongData (string url)

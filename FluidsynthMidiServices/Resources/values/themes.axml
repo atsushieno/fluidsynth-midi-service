@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Styled" parent="@style/Theme.AppCompat.NoActionBar">
+	</style>
+    <style name="FilePickerTheme" parent="NNF_BaseTheme">
+        <item name="alertDialogTheme">@style/FilePickerAlertDialogTheme</item>
+	</style>
+    <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+	</style>
+</resources>

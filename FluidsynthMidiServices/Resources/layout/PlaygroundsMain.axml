@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical">
     <Button
+        android:id="@+id/openSoundFontManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open SoundFont Manager" />
+    <Button
         android:id="@+id/openFreeStylePad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

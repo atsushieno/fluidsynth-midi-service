@@ -43,10 +43,10 @@ namespace FluidsynthMidiServices
 		
 		public IMidiOutput GetMidiOutput (Context context)
 		{
-			if (acc == null) {
+			if (acc == null)
 				SetupMidiAccess (context);
+			if (output == null || output.State == MidiPortDeviceState.Disconnected)
 				output = acc.OpenOutputAsync (acc.Outputs.First ().Id).Result;
-			}
 			return output;
 		}
 		

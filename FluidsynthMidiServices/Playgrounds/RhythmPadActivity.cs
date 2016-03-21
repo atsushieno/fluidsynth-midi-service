@@ -82,7 +82,14 @@ namespace FluidsynthMidiServices
 				}
 			};
 		}
-		
+
+		protected override void OnDestroy ()
+		{
+			var output = MidiState.Instance.GetMidiOutput (this);
+			output.CloseAsync ();
+			base.OnDestroy ();
+		}
+
 		void Redraw (ISurfaceHolder holder)
 		{
 			int padding = size / pad_size_denom;

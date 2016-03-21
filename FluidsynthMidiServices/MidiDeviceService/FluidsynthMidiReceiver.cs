@@ -78,19 +78,23 @@ namespace FluidsynthMidiServices
 
 		protected override void Dispose (bool disposing)
 		{
+			if (disposing)
+				Close ();
+			base.Dispose (disposing);
+		}
+
+		internal void Close ()
+		{
 #if MIDI_MANAGER
 #else
-			if (disposing) {
-				if (asset_sfloader != null)
-					asset_sfloader.Dispose ();
-				if (asset_stream_loader != null)
-					asset_stream_loader.Dispose ();
-				adriver.Dispose ();
-				syn.Dispose ();
-				IsDisposed = true;
-			}
+			if (asset_sfloader != null)
+				asset_sfloader.Dispose ();
+			if (asset_stream_loader != null)
+				asset_stream_loader.Dispose ();
+			adriver.Dispose ();
+			syn.Dispose ();
+			IsDisposed = true;
 #endif
-			base.Dispose (disposing);
 		}
 
 		public override void OnSend (byte[] msg, int offset, int count, long timestamp)
