@@ -21,6 +21,7 @@ namespace FluidsynthMidiServices
 
 		public FluidsynthMidiReceiver (Context context)
 		{
+			MidiState.Instance.MountObbs (context);
 #if MIDI_MANAGER
 			access = new FluidsynthMidiAccess ();
 			access.ConfigureSettings = (settings) => {
@@ -48,18 +49,16 @@ namespace FluidsynthMidiServices
 			settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 #if MIDI_MANAGER
 			};
-			string sf2Dir = Path.Combine (context.ObbDir.AbsolutePath);
-			if (Directory.Exists (sf2Dir))
-				foreach (var obbSf2 in Directory.GetFiles (sf2Dir, "*.sf2", SearchOption.AllDirectories))
-					access.Soundfonts.Add (obbSf2);
+			SynthAndroidExtensions.GetSoundFonts (access.SoundFonts, context, predefined_temp_path);
 			output = access.OpenOutputAsync (access.Outputs.First ().Id).Result;
 #else
 			syn = new Synth (settings);
+			var sfs = new List<string> ();
+			SynthAndroidExtensions.GetSoundFonts (sfs, context, predefined_temp_path);
+
 			asset_stream_loader = new AndroidAssetStreamLoader (context.Assets);
 			asset_sfloader = new SoundFontLoader (syn, asset_stream_loader);
 			syn.AddSoundFontLoader (asset_sfloader);
-			var sfs = new List<string> ();
-			SynthAndroidExtensions.LoadSoundFontSpecial (sfs, context, predefined_temp_path);
 			foreach (var sf in sfs)
 				syn.LoadSoundFont (sf, false);
 

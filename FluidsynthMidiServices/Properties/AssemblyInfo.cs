@@ -29,3 +29,4 @@ using Android.App;
 [assembly:UsesFeature (Android.Content.PM.PackageManager.FeatureMidi, Required = false)]
 [assembly:UsesPermission (Android.Manifest.Permission.BindMidiDeviceService)]
 [assembly:UsesPermission (Android.Manifest.Permission.ReadExternalStorage)]
+[assembly:UsesPermission (Android.Manifest.Permission.WriteExternalStorage)]

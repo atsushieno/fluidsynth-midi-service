@@ -5,8 +5,10 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.OS.Storage;
 using Android.Util;
 using Android.Widget;
+using Java.Interop;
 using Commons.Music.Midi;
 using Commons.Music.Midi.Mml;
 
@@ -22,6 +24,7 @@ namespace FluidsynthMidiServices
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+
 			SetContentView (Resource.Layout.Main);
 			
 			FindViewById<Button> (Resource.Id.openFreeStylePad).Click += delegate {
@@ -98,6 +101,9 @@ namespace FluidsynthMidiServices
 					player = null;
 				}
 			};
+
+			// Mount OBBs at bootstrap.
+			MidiState.Instance.MountObbs (this);
 		}
 		
 		SmfMusic GetSongData (string url)

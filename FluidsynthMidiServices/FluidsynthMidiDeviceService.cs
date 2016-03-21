@@ -14,20 +14,15 @@ namespace FluidsynthMidiServices
 		// default constructor for normal service instance
 		public FluidsynthMidiDeviceService ()
 		{
-		}
-
-		// for debugging
-		public FluidsynthMidiDeviceService (Context context)
-		{
 			if (fluidsynth_receiver == null)
-				fluidsynth_receiver = new FluidsynthMidiReceiver (context);
+				fluidsynth_receiver = new FluidsynthMidiReceiver (this);
 		}
 
 		FluidsynthMidiReceiver fluidsynth_receiver;
 
 		public override void OnCreate ()
 		{
-			fluidsynth_receiver = new FluidsynthMidiReceiver (ApplicationContext);
+			fluidsynth_receiver = new FluidsynthMidiReceiver (this);
 		}
 
 		public override MidiReceiver[] OnGetInputPortReceivers ()

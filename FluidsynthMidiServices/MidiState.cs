@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Media;
 using Android.Media.Midi;
@@ -27,6 +29,16 @@ namespace FluidsynthMidiServices
 		static MidiState ()
 		{
 			Instance = new MidiState ();
+		}
+
+		public void MountObbs (Context context)
+		{
+			if ((int) Android.OS.Build.VERSION.SdkInt >= (int) Android.OS.BuildVersionCodes.Kitkat) {
+				var obbMgr = context.GetSystemService (Context.StorageService).JavaCast<StorageManager> ();
+				var obbs = context.GetObbDirs ().SelectMany (d => Directory.GetFiles (d.Path, "*.obb"));
+				foreach (var obb in obbs.Where (obb => !obbMgr.IsObbMounted (obb)))
+					obbMgr.MountObb (obb, null, new ObbListener ());
+			}
 		}
 		
 		public IMidiOutput GetMidiOutput (Context context)
@@ -65,7 +77,7 @@ namespace FluidsynthMidiServices
 				//settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
 			};
 			acc.SoundFontLoaderFactories.Add (syn => new SoundFontLoader (syn, new AndroidAssetStreamLoader (context.Assets)));
-			SynthAndroidExtensions.LoadSoundFontSpecial (acc.SoundFonts, context, predefined_temp_path);
+			SynthAndroidExtensions.GetSoundFonts (acc.SoundFonts, context, predefined_temp_path);
 #endif
 		}
 	}
@@ -80,16 +92,12 @@ namespace FluidsynthMidiServices
 
 	static class SynthAndroidExtensions
 	{
-		public static void LoadSoundFontSpecial (IList<string> soundFonts, Context context, string predefinedTempPath)
+		public static void GetSoundFonts (IList<string> soundFonts, Context context, string predefinedTempPath, CancellationToken cancellationToken = default (CancellationToken))
 		{
 			// OBB support
-			var obbMgr = context.GetSystemService (Context.StorageService).JavaCast<StorageManager> ();
 			if ((int) Android.OS.Build.VERSION.SdkInt >= (int) Android.OS.BuildVersionCodes.Kitkat) {
+				var obbMgr = context.GetSystemService (Context.StorageService).JavaCast<StorageManager> ();
 				var obbs = context.GetObbDirs ().SelectMany (d => Directory.GetFiles (d.Path, "*.obb"));
-				foreach (var obbDir in obbs) {
-					if (!obbMgr.IsObbMounted (obbDir))
-						obbMgr.MountObb (obbDir, null, new ObbListener ());
-				}
 				foreach (var obbDir in obbs.Where (d => obbMgr.IsObbMounted (d)).Select (d => obbMgr.GetMountedObbPath (d)))
 					foreach (var sf2 in Directory.GetFiles (obbDir, "*.sf2", SearchOption.AllDirectories))
 						soundFonts.Add (sf2);
@@ -99,7 +107,7 @@ namespace FluidsynthMidiServices
 			foreach (var asset in context.Assets.List (""))
 				if (asset.EndsWith (".sf2", StringComparison.OrdinalIgnoreCase))
 					soundFonts.Add (asset);
-#if true//DEBUG
+#if DEBUG
 			// temporary local files for debugging
 			if (Directory.Exists (predefinedTempPath))
 				foreach (var sf2 in Directory.GetFiles (predefinedTempPath, "*.sf2", SearchOption.AllDirectories))
