@@ -11,6 +11,10 @@ all:
 prepare:
 	cd external/android-fluidsynth && make $(AF_OPTIONS) prepare || exit 1
 
+prepare-sf2:
+	wget http://http.debian.net/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz || rm fluid-soundfont_3.1.orig.tar.gz && exit 1
+	cd external && tar zxvf ../fluid-soundfont_3.1.orig.tar.gz && cd ..
+
 hackinstall:
 	cd external/android-fluidsynth && make $(AF_OPTIONS) || exit 1
 	rm -rf NFluidsynth.Android/Libs

@@ -13,10 +13,11 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidApplication>True</AndroidApplication>
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
     <AssemblyName>FluidsynthMidiServices</AssemblyName>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,25 +31,9 @@
     <ConsolePause>false</ConsolePause>
     <AndroidStoreUncompressedFileExtensions>sf2</AndroidStoreUncompressedFileExtensions>
     <IntermediateOutputPath>obj\Debug</IntermediateOutputPath>
-    <ExternalConsole>false</ExternalConsole>
-    <Commandlineparameters></Commandlineparameters>
     <RunWithWarnings>true</RunWithWarnings>
-    <MandroidExtraArgs></MandroidExtraArgs>
-    <AndroidLinkSkip></AndroidLinkSkip>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
-    <MandroidI18n></MandroidI18n>
-    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
-    <EmbedAssembliesIntoApk></EmbedAssembliesIntoApk>
-    <JavaMaximumHeapSize></JavaMaximumHeapSize>
-    <JavaOptions></JavaOptions>
-    <AndroidKeyStore></AndroidKeyStore>
-    <AndroidSigningKeyStore></AndroidSigningKeyStore>
-    <AndroidSigningStorePass></AndroidSigningStorePass>
-    <AndroidSigningKeyAlias></AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass></AndroidSigningKeyPass>
-    <NoWarn></NoWarn>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <AndroidFastDeploymentType>Assemblies:Dees</AndroidFastDeploymentType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -130,5 +115,11 @@
     <AndroidAsset Include="Assets\escape.mid" />
     <AndroidAsset Include="Assets\wish.mid" />
     <AndroidAsset Include="Assets\wish.mml" />
+    <AndroidAsset Include="..\external\fluid-soundfont-3.1\FluidR3_GM.sf2">
+      <Link>Assets\FluidR3_GM.sf2</Link>
+    </AndroidAsset>
+    <AndroidAsset Include="..\external\fluid-soundfont-3.1\FluidR3_GS.sf2">
+      <Link>Assets\FluidR3_GS.sf2</Link>
+    </AndroidAsset>
   </ItemGroup>
 </Project>
