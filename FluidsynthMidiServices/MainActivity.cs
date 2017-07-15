@@ -82,7 +82,7 @@ namespace FluidsynthMidiServices
 			var playMmlButton = FindViewById<Button> (Resource.Id.playMML);
 			playMmlButton.Click += delegate {
 				if (player == null) {
-					SmfMusic song;
+					MidiMusic song;
 					try {
 						song = CompileMmlToSong (mmlEditText.Text);
 					} catch (MmlException ex) {
@@ -106,22 +106,22 @@ namespace FluidsynthMidiServices
 			MidiState.Instance.MountObbs (this);
 		}
 		
-		SmfMusic GetSongData (string url)
+		MidiMusic GetSongData (string url)
 		{
-			return SmfMusic.Read (new AssetOrUrlResolver (this).ResolveStream (url));
+			return MidiMusic.Read (new AssetOrUrlResolver (this).ResolveStream (url));
 		}
 		
-		SmfMusic CompileMmlToSong (string mml)
+		MidiMusic CompileMmlToSong (string mml)
 		{
 			var compiler = new MmlCompiler ();
 			compiler.Resolver = new AssetOrUrlResolver (this);
 			var midiStream = new MemoryStream ();
 			var source = new MmlInputSource ("", new StringReader (mml));
 			compiler.Compile (false, Enumerable.Repeat (source, 1).ToArray (), null, midiStream, false);
-			return SmfMusic.Read (new MemoryStream (midiStream.ToArray ()));
+			return MidiMusic.Read (new MemoryStream (midiStream.ToArray ()));
 		}
 		
-		void StartNewSong (SmfMusic music)
+		void StartNewSong (MidiMusic music)
 		{
 			if (player != null)
 				player.Dispose ();

@@ -60,24 +60,6 @@
     <Compile Include="..\external\managed-midi\lib\module-database\MidiModuleDatabase.cs">
       <Link>lib\module-database\MidiModuleDatabase.cs</Link>
     </Compile>
-    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiAccess.cs">
-      <Link>lib\portmidi\PortMidiAccess.cs</Link>
-    </Compile>
-    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiPlayer.cs">
-      <Link>lib\portmidi\PortMidiPlayer.cs</Link>
-    </Compile>
-    <Compile Include="..\external\managed-midi\lib\portmidi\PortMidiSharp.cs">
-      <Link>lib\portmidi\PortMidiSharp.cs</Link>
-    </Compile>
-    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiAccess.cs">
-      <Link>lib\rtmidi\RtMidiAccess.cs</Link>
-    </Compile>
-    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiPlayer.cs">
-      <Link>lib\rtmidi\RtMidiPlayer.cs</Link>
-    </Compile>
-    <Compile Include="..\external\managed-midi\lib\rtmidi\RtMidiSharp.cs">
-      <Link>lib\rtmidi\RtMidiSharp.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\external\managed-midi\lib\module-database\data\midi-module-catalog.txt">

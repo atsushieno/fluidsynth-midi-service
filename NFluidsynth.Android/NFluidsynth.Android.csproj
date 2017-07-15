@@ -139,23 +139,8 @@
     <Folder Include="NFluidsynth\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libcharset.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libffi.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libgio-2.0.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libgmodule-2.0.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libgnustl.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libgobject-2.0.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libiconv.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libintl.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libz.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\preloadable_libiconv.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libglib-2.0.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libgthread-2.0.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libfluidsynth.so" />
-    <EmbeddedNativeLibrary Include="Libs\x86\gdbserver.so" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedNativeLibrary Include="Libs\x86\libfluidsynth.so" />
+    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libfluidsynth.so" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
