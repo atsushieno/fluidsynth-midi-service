@@ -2569,23 +2569,23 @@ namespace SoundFontProvider
 			// aapt resource value: 0x7f0b001c
 			public const int hello = 2131427356;
 			
-			// aapt resource value: 0x7f0b001b
-			public const int library_name = 2131427355;
-			
 			// aapt resource value: 0x7f0b0016
-			public const int nnf_create_folder_error = 2131427350;
+			public const int library_name = 2131427350;
 			
 			// aapt resource value: 0x7f0b0017
-			public const int nnf_name = 2131427351;
+			public const int nnf_create_folder_error = 2131427351;
 			
 			// aapt resource value: 0x7f0b0018
-			public const int nnf_new_folder = 2131427352;
+			public const int nnf_name = 2131427352;
 			
 			// aapt resource value: 0x7f0b0019
-			public const int nnf_permission_external_write_denied = 2131427353;
+			public const int nnf_new_folder = 2131427353;
 			
 			// aapt resource value: 0x7f0b001a
-			public const int nnf_select_something_first = 2131427354;
+			public const int nnf_permission_external_write_denied = 2131427354;
+			
+			// aapt resource value: 0x7f0b001b
+			public const int nnf_select_something_first = 2131427355;
 			
 			// aapt resource value: 0x7f0b0015
 			public const int status_bar_notification_info_overflow = 2131427349;

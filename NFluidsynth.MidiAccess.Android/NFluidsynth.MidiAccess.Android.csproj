@@ -3,16 +3,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{40B66B85-7542-4783-AE88-3A6F9CCBE7E1}</ProjectGuid>
+    <ProjectGuid>{549311B4-48E4-4C8B-B41E-B71F17F1A598}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>NFluidsynth.MidiAccess</RootNamespace>
-    <AssemblyName>NFluidsynth.MidiAccess</AssemblyName>
+    <RootNamespace>NFluidsynth.MidiAccess.Android</RootNamespace>
+    <AssemblyName>NFluidsynth.MidiAccess.Android</AssemblyName>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,15 +23,17 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <AndroidManagedSymbols>true</AndroidManagedSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,19 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\external\nfluidsynth\NFluidsynth.MidiAccess\FluidsynthMidiAccess.cs">
-      <Link>FluidsynthMidiAccess.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
-      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
-      <Name>Commons.Music.Midi.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NFluidsynth.Android\NFluidsynth.Android.csproj">
       <Project>{83B7266D-75D2-481F-B082-0FF8E7E2EC72}</Project>
       <Name>NFluidsynth.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\external\nfluidsynth\external\managed-midi\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
+      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
+      <Name>Commons.Music.Midi.Android</Name>
+    </ProjectReference>
   </ItemGroup>
+  <Import Project="..\external\nfluidsynth\NFluidsynth.MidiAccess.Shared\NFluidsynth.MidiAccess.Shared.projitems" Label="Shared" Condition="Exists('..\external\nfluidsynth\NFluidsynth.MidiAccess.Shared\NFluidsynth.MidiAccess.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

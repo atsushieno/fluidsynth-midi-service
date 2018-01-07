@@ -109,7 +109,7 @@ namespace FluidsynthMidiServices
 		void DoSend (byte[] msg, int offset, int count, long timestamp)
 		{
 #if MIDI_MANAGER
-			output.SendAsync (msg, offset, count, timestamp);
+			output.Send (msg, offset, count, timestamp);
 #else
 			// FIXME: consider timestamp.
 

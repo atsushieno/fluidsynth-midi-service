@@ -1,5 +1,6 @@
 bin
 obj
 *.userprefs
+.vs
 packages
 NFluidsynth.Android/Libs

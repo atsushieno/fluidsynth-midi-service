@@ -37,7 +37,6 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
     <IntermediateOutputPath>obj\Release</IntermediateOutputPath>
     <DebugSymbols>false</DebugSymbols>
@@ -45,11 +44,8 @@
     <Commandlineparameters></Commandlineparameters>
     <RunWithWarnings>true</RunWithWarnings>
     <MandroidExtraArgs></MandroidExtraArgs>
-    <AndroidLinkSkip></AndroidLinkSkip>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AndroidStoreUncompressedFileExtensions></AndroidStoreUncompressedFileExtensions>
     <MandroidI18n></MandroidI18n>
-    <AndroidSupportedAbis></AndroidSupportedAbis>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
@@ -61,86 +57,17 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\AudioDriver.cs">
-      <Link>NFluidsynth\NFluidsynth\AudioDriver.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\Enums.cs">
-      <Link>NFluidsynth\NFluidsynth\Enums.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\FileRenderer.cs">
-      <Link>NFluidsynth\NFluidsynth\FileRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\FluidSynthInteropException.cs">
-      <Link>NFluidsynth\NFluidsynth\FluidSynthInteropException.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\FluidsynthObject.cs">
-      <Link>NFluidsynth\NFluidsynth\FluidsynthObject.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\MidiDriver.cs">
-      <Link>NFluidsynth\NFluidsynth\MidiDriver.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\MidiEvent.cs">
-      <Link>NFluidsynth\NFluidsynth\MidiEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\MidiRouter.cs">
-      <Link>NFluidsynth\NFluidsynth\MidiRouter.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\MidiRouterRule.cs">
-      <Link>NFluidsynth\NFluidsynth\MidiRouterRule.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\Player.cs">
-      <Link>NFluidsynth\NFluidsynth\Player.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\Settings.cs">
-      <Link>NFluidsynth\NFluidsynth\Settings.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\SoundFont.cs">
-      <Link>NFluidsynth\NFluidsynth\SoundFont.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\Synth.cs">
-      <Link>NFluidsynth\NFluidsynth\Synth.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\Voice.cs">
-      <Link>NFluidsynth\NFluidsynth\Voice.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.Audio.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.Audio.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.Midi.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.Midi.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.Misc.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.Misc.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.Settings.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.Settings.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.Synth.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.Synth.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Native\LibFluidsynth.cs">
-      <Link>NFluidsynth\NFluidsynth.Native\LibFluidsynth.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\generator\ConfigurationKeys.cs">
-      <Link>NFluidsynth\generator\ConfigurationKeys.cs</Link>
-    </Compile>
     <None Include="Resources\AboutResources.txt" />
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\SoundFontLoader.cs">
-      <Link>NFluidsynth\NFluidsynth\SoundFontLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\external\nfluidsynth\NFluidsynth\NFluidsynth\StreamLoader.cs">
-      <Link>NFluidsynth\NFluidsynth\StreamLoader.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\" />
     <Folder Include="Libs\armeabi-v7a\" />
     <Folder Include="Libs\x86\" />
-    <Folder Include="NFluidsynth\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedNativeLibrary Include="Libs\x86\libfluidsynth.so" />
     <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libfluidsynth.so" />
   </ItemGroup>
+  <Import Project="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Shared.projitems" Label="Shared" Condition="Exists('..\external\nfluidsynth\NFluidsynth\NFluidsynth.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

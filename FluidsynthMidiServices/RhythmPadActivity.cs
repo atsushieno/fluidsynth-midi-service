@@ -66,12 +66,12 @@ namespace FluidsynthMidiServices
 						var output = MidiState.Instance.GetMidiOutput (this);
 						if (!initialized) {
 							initialized = true;
-							output.SendAsync (new Byte [] { 0xB9, 0, 1 }, 0, 3, 0);
-							output.SendAsync (new Byte [] { 0xB9, 0x20, 0 }, 0, 3, 0);
-							output.SendAsync (new Byte [] { 0xB9, 11, 127 }, 0, 3, 0);
-							output.SendAsync (new Byte [] { 0xC9, 0 }, 0, 2, 0);
+							output.Send (new Byte [] { 0xB9, 0, 1 }, 0, 3, 0);
+							output.Send (new Byte [] { 0xB9, 0x20, 0 }, 0, 3, 0);
+							output.Send (new Byte [] { 0xB9, 11, 127 }, 0, 3, 0);
+							output.Send (new Byte [] { 0xC9, 0 }, 0, 2, 0);
 						}
-						output.SendAsync (new byte [] {
+						output.Send (new byte [] {
 							(byte) (on ? 0x99 : 0x89),
 							(byte) (0x20 + v * 8 + h),
 							(byte) (on ? 120 : 0)}, 0, 3, 0);

@@ -8,7 +8,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SoundFontProvider</RootNamespace>
     <AssemblyName>SoundFontProvider</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -16,6 +15,7 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,7 +34,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,14 +89,6 @@
     <Folder Include="Resources\menu\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Commons.Music.Midi.AndroidExtensions\Commons.Music.Midi.AndroidExtensions.csproj">
-      <Project>{6C5EE058-E3D8-4390-9434-181C1743AB74}</Project>
-      <Name>Commons.Music.Midi.AndroidExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
-      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
-      <Name>Commons.Music.Midi.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NAudio.SoundFont.Android\NAudio.SoundFont.Android.csproj">
       <Project>{361A7415-3B9F-49A8-8EA3-97E13604566B}</Project>
       <Name>NAudio.SoundFont.Android</Name>
@@ -105,6 +96,14 @@
     <ProjectReference Include="..\NoNonsenseFilePickerBinding\NoNonsenseFilePickerBinding.csproj">
       <Project>{434AF485-EA49-4B87-B8CD-3423243D38CC}</Project>
       <Name>NoNonsenseFilePickerBinding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\external\nfluidsynth\external\managed-midi\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
+      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
+      <Name>Commons.Music.Midi.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Commons.Music.Midi.AndroidExtensions\Commons.Music.Midi.AndroidExtensions.csproj">
+      <Project>{6C5EE058-E3D8-4390-9434-181C1743AB74}</Project>
+      <Name>Commons.Music.Midi.AndroidExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

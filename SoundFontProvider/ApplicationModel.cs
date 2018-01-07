@@ -1,8 +1,8 @@
 using System.IO;
-using Commons.Music.Midi.AndroidExtensions;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Commons.Music.Midi.AndroidExtensions;
 
 namespace SoundFontProvider
 {
