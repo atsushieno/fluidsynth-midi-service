@@ -55,8 +55,7 @@ namespace FluidsynthMidiServices
 			var sfs = new List<string> ();
 			SynthAndroidExtensions.GetSoundFonts (sfs, context, predefined_temp_path);
 
-			asset_stream_loader = new AndroidAssetStreamLoader (context.Assets);
-			asset_sfloader = new SoundFontLoader (syn, asset_stream_loader);
+			asset_sfloader = new AndroidAssetSoundFontLoader (syn, context.Assets);
 			syn.AddSoundFontLoader (asset_sfloader);
 			foreach (var sf in sfs)
 				syn.LoadSoundFont (sf, false);
@@ -71,7 +70,6 @@ namespace FluidsynthMidiServices
 #else
 		Synth syn;
 		AudioDriver adriver;
-		AndroidAssetStreamLoader asset_stream_loader;
 		SoundFontLoader asset_sfloader;
 #endif
 		public bool IsDisposed { get; private set; }
@@ -83,8 +81,6 @@ namespace FluidsynthMidiServices
 			if (disposing) {
 				if (asset_sfloader != null)
 					asset_sfloader.Dispose ();
-				if (asset_stream_loader != null)
-					asset_stream_loader.Dispose ();
 				adriver.Dispose ();
 				syn.Dispose ();
 				IsDisposed = true;

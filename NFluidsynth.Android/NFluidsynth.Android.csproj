@@ -32,7 +32,6 @@
     <WarningsNotAsErrors></WarningsNotAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -40,6 +39,7 @@
     <ConsolePause>false</ConsolePause>
     <IntermediateOutputPath>obj\Release</IntermediateOutputPath>
     <DebugSymbols>false</DebugSymbols>
+    <DefineConstants>ANDROID</DefineConstants>
     <ExternalConsole>false</ExternalConsole>
     <Commandlineparameters></Commandlineparameters>
     <RunWithWarnings>true</RunWithWarnings>
@@ -58,6 +58,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Resources\AboutResources.txt" />
+    <Compile Include="AndroidAssetSoundFontLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\" />
