@@ -55,7 +55,7 @@ namespace FluidsynthMidiServices
 			var sfs = new List<string> ();
 			SynthAndroidExtensions.GetSoundFonts (sfs, context, predefined_temp_path);
 
-			asset_sfloader = new AndroidAssetSoundFontLoader (syn, context.Assets);
+			asset_sfloader = new AndroidAssetSoundFontLoader (settings, context.Assets);
 			syn.AddSoundFontLoader (asset_sfloader);
 			foreach (var sf in sfs)
 				syn.LoadSoundFont (sf, false);

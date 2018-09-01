@@ -11,9 +11,8 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>NFluidsynth.Android</AssemblyName>
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,8 +65,10 @@
     <Folder Include="Libs\x86\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedNativeLibrary Include="Libs\x86\libfluidsynth.so" />
-    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\libfluidsynth.so" />
+    <EmbeddedNativeLibrary Include="Libs\x86\*.so" />
+    <EmbeddedNativeLibrary Include="Libs\x86_64\*.so" />
+    <EmbeddedNativeLibrary Include="Libs\armeabi-v7a\*.so" />
+    <EmbeddedNativeLibrary Include="Libs\arm64-v8a\*.so" />
   </ItemGroup>
   <Import Project="..\external\nfluidsynth\NFluidsynth\NFluidsynth.Shared.projitems" Label="Shared" Condition="Exists('..\external\nfluidsynth\NFluidsynth\NFluidsynth.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

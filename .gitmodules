@@ -13,3 +13,6 @@
 [submodule "external/naudio"]
 	path = external/naudio
 	url = https://github.com/naudio/NAudio.git
+[submodule "external/fluidsynth"]
+	path = external/fluidsynth
+	url = https://github.com/atsushieno/fluidsynth-fork.git

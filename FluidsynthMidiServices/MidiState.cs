@@ -75,8 +75,8 @@ namespace FluidsynthMidiServices
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
+				acc.SoundFontLoaderFactories.Add (syn => new AndroidAssetSoundFontLoader (settings, context.Assets));
 			};
-			acc.SoundFontLoaderFactories.Add (syn => new AndroidAssetSoundFontLoader (syn, context.Assets));
 			SynthAndroidExtensions.GetSoundFonts (acc.SoundFonts, context, predefined_temp_path);
 #endif
 		}
