@@ -1,12 +1,44 @@
-﻿using System;
+﻿#define NATIVE_ASSET_SFLOADER
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using Android.Content.Res;
+using Android.Runtime;
 using static NFluidsynth.Native.LibFluidsynth;
 
 namespace NFluidsynth
 {
+	public class AndroidNativeAssetSoundFontLoader : SoundFontLoader
+	{
+		static T DoAndThen<T> (Action action, Func<T> then)
+		{
+			action ();
+			return then ();
+		}
+
+		public AndroidNativeAssetSoundFontLoader (Settings settings, AssetManager assetManager)
+			: base (DoAndThen (() => set_asset_manager_context (JNIEnv.Handle, IntPtr.Zero, assetManager.Handle), () => new_fluid_android_asset_sfloader (settings.Handle, IntPtr.Zero)))
+		{
+			this.asset_manager = GCHandle.Alloc (asset_manager);
+		}
+
+		GCHandle asset_manager;
+
+		public override void Dispose ()
+		{
+			if (asset_manager.IsAllocated)
+				asset_manager.Free ();
+			base.Dispose ();
+		}
+
+		[DllImport ("fluidsynth", EntryPoint = "Java_fluidsynth_androidextensions_NativeHandler_setAssetManagerContext")]
+		static extern void set_asset_manager_context (IntPtr jniEnv, IntPtr __this, IntPtr assetManager);
+
+		[DllImport ("fluidsynth")]
+		static extern IntPtr new_fluid_android_asset_sfloader (IntPtr settings, IntPtr nativeAssetManager);
+	}
+
 	public class AndroidAssetSoundFontLoader : SoundFontLoader
 	{
 		public AndroidAssetSoundFontLoader (Settings settings, AssetManager assetManager)
@@ -26,12 +58,17 @@ namespace NFluidsynth
 
 			Dictionary<int, Stream> streams = new Dictionary<int, Stream> ();
 
-			int counter;
 			public override IntPtr Open (string filename)
 			{
 				var stream = am.Open (filename, Access.Random);
-				streams [counter] = stream;
-				return (IntPtr)counter++;
+				// it is ugly, but since Xamarin.Android does not offer
+				// seekable stream via AssetManager, we first load everything in memory and then store it as MemoryStream.
+				var ms = new MemoryStream (1048576);
+				stream.CopyTo (ms);
+				stream.Close ();
+				streams [streams.Count + 1] = ms;
+				ms.Position = 0;
+				return (IntPtr) (streams.Count);
 			}
 
 			public override int Close (IntPtr sfHandle)

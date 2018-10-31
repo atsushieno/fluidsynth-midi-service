@@ -68,14 +68,14 @@ namespace FluidsynthMidiServices
 				
 				// Note that SynthSampleRate is NOT audio sample rate but *synthesizing* sample rate.
 				// So it is kind of wrong assumption that AudioManager.PropertyOutputSampleRate would give the best outcome...
-				var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
-				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
-				//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
+				//var sr = double.Parse (manager.GetProperty (AudioManager.PropertyOutputSampleRate));
+				//settings [ConfigurationKeys.SynthSampleRate].DoubleValue = sr;
+				settings [ConfigurationKeys.SynthSampleRate].DoubleValue = 11025;
 
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
-				acc.SoundFontLoaderFactories.Add (syn => new AndroidAssetSoundFontLoader (settings, context.Assets));
+				acc.SoundFontLoaderFactories.Add (syn => new AndroidNativeAssetSoundFontLoader (settings, context.Assets));
 			};
 			SynthAndroidExtensions.GetSoundFonts (acc.SoundFonts, context, predefined_temp_path);
 #endif
