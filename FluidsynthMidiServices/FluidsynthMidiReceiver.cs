@@ -27,7 +27,7 @@ namespace FluidsynthMidiServices
 #else
 			var settings = new Settings ();
 #endif
-			//settings [ConfigurationKeys.AudioDriver].StringValue = "opensles";
+			settings [ConfigurationKeys.AudioDriver].StringValue = "oboe";
 			
 			//settings [ConfigurationKeys.SynthParallelRender].IntValue = 0;
 			//settings [ConfigurationKeys.SynthThreadsafeApi].IntValue = 0;

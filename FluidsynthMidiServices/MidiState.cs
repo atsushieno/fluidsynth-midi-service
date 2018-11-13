@@ -75,6 +75,7 @@ namespace FluidsynthMidiServices
 				var fpb = double.Parse (manager.GetProperty (AudioManager.PropertyOutputFramesPerBuffer));
 				settings [ConfigurationKeys.AudioPeriodSize].IntValue = (int) fpb;
 				settings [ConfigurationKeys.SynthThreadSafeApi].IntValue = 0;
+				settings [ConfigurationKeys.AudioDriver].StringValue = "oboe";
 				acc.SoundFontLoaderFactories.Add (syn => new AndroidNativeAssetSoundFontLoader (settings, context.Assets));
 			};
 			SynthAndroidExtensions.GetSoundFonts (acc.SoundFonts, context, predefined_temp_path);
