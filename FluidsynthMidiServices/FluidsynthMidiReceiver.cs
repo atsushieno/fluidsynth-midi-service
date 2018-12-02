@@ -21,6 +21,7 @@ namespace FluidsynthMidiServices
 
 		public FluidsynthMidiReceiver (Context context)
 		{
+			Logger.SetLoggerMethod (ConsoleLogger.LogMessage);
 #if MIDI_MANAGER
 			access = new FluidsynthMidiAccess ();
 			access.ConfigureSettings = (settings) => {

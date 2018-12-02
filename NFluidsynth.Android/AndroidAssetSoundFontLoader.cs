@@ -32,10 +32,10 @@ namespace NFluidsynth
 			base.Dispose ();
 		}
 
-		[DllImport ("fluidsynth", EntryPoint = "Java_fluidsynth_androidextensions_NativeHandler_setAssetManagerContext")]
+		[DllImport ("fluidsynth-assetloader", EntryPoint = "Java_fluidsynth_androidextensions_NativeHandler_setAssetManagerContext")]
 		static extern void set_asset_manager_context (IntPtr jniEnv, IntPtr __this, IntPtr assetManager);
 
-		[DllImport ("fluidsynth")]
+		[DllImport ("fluidsynth-assetloader")]
 		static extern IntPtr new_fluid_android_asset_sfloader (IntPtr settings, IntPtr nativeAssetManager);
 	}
 

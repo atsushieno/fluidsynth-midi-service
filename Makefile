@@ -17,7 +17,7 @@ prepare-fluidsynth:
 build-native: build-fluidsynth
 
 build-fluidsynth:
-	cd external/fluidsynth/android && make -f Makefile.android && make -f Makefile.android dist || exit 1
+	cd external/fluidsynth/android && make -f Makefile.android || exit 1
 	rm -rf NFluidsynth.Android/Libs
 	mkdir -p NFluidsynth.Android/Libs
 	cp -R external/fluidsynth/android/dist/* NFluidsynth.Android/Libs
