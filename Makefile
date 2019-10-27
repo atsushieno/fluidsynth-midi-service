@@ -3,34 +3,30 @@
 SIGNING_KEY_ALIAS = googleplay
 SIGNING_KEY_STORE = ~/my-google-play.keystore
 
-all: build-native prepare-sf2 msbuild
+all: build-native msbuild
 	# cd external/android-fluidsynth && make $(AF_OPTIONS) || exit 1
 	# rm -rf NFluidsynth.Android/Libs
 	# cp -R external/android-fluidsynth/libs NFluidsynth.Android/Libs
+
+prepare: prepare-fluidsynth
 
 msbuild:
 	msbuild
 
 prepare-fluidsynth:
-	cd external/fluidsynth/android && make -f Makefile.android prepare || exit 1
+	cd external/fluidsynth/doc/android && make -f Makefile.android prepare || exit 1
 
 build-native: build-fluidsynth
 
 build-fluidsynth:
-	cd external/fluidsynth/android && make -f Makefile.android && make -f Makefile.android dist || exit 1
+	cd external/fluidsynth/doc/android && make -f Makefile.android && make -f Makefile.android dist || exit 1
 	rm -rf NFluidsynth.Android/Libs
 	mkdir -p NFluidsynth.Android/Libs
-	cp -R external/fluidsynth/android/dist/* NFluidsynth.Android/Libs
+	cp -R external/fluidsynth/doc/android/dist/* NFluidsynth.Android/Libs
 
 prepare-gdbserver:
 	cp $(ANDROID_NDK_PATH)/prebuilt/android-arm/gdbserver/gdbserver NFluidsynth.Android/Libs/armeabi-v7a/gdbserver.so
 	cp $(ANDROID_NDK_PATH)/prebuilt/android-x86/gdbserver/gdbserver NFluidsynth.Android/Libs/x86/gdbserver.so
-
-prepare-sf2: external/fluid-soundfont-3.1
-
-fluid-soundfont-3.1: external/fluid-sf.stamp
-	wget http://http.debian.net/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz || rm fluid-soundfont_3.1.orig.tar.gz && exit 1
-	cd external && tar zxvf ../fluid-soundfont_3.1.orig.tar.gz && touch fluid-sf.stamp && cd ..
 
 hackinstall: build-native
 	xbuild
