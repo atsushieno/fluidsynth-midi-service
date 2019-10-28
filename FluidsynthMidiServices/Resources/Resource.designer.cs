@@ -26,7 +26,6 @@ namespace FluidsynthMidiServices
 		
 		public static void UpdateIdValues()
 		{
-			global::mugenelib.Resource.String.library_name = global::FluidsynthMidiServices.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -45,8 +44,8 @@ namespace FluidsynthMidiServices
 		public partial class Drawable
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int Icon = 2130837504;
+			// aapt resource value: 0x7F010000
+			public const int Icon = 2130771968;
 			
 			static Drawable()
 			{
@@ -61,29 +60,29 @@ namespace FluidsynthMidiServices
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060005
-			public const int editText = 2131099653;
+			// aapt resource value: 0x7F020000
+			public const int editText = 2130837504;
 			
-			// aapt resource value: 0x7f060007
-			public const int mainSurface = 2131099655;
+			// aapt resource value: 0x7F020001
+			public const int mainSurface = 2130837505;
 			
-			// aapt resource value: 0x7f060000
-			public const int openFreeStylePad = 2131099648;
+			// aapt resource value: 0x7F020002
+			public const int openFreeStylePad = 2130837506;
 			
-			// aapt resource value: 0x7f060001
-			public const int playChord = 2131099649;
+			// aapt resource value: 0x7F020003
+			public const int playChord = 2130837507;
 			
-			// aapt resource value: 0x7f060004
-			public const int playMML = 2131099652;
+			// aapt resource value: 0x7F020004
+			public const int playMML = 2130837508;
 			
-			// aapt resource value: 0x7f060003
-			public const int playSong = 2131099651;
+			// aapt resource value: 0x7F020005
+			public const int playSong = 2130837509;
 			
-			// aapt resource value: 0x7f060006
-			public const int programSelector = 2131099654;
+			// aapt resource value: 0x7F020006
+			public const int programSelector = 2130837510;
 			
-			// aapt resource value: 0x7f060002
-			public const int songFileNameOrUrlEditText = 2131099650;
+			// aapt resource value: 0x7F020007
+			public const int songFileNameOrUrlEditText = 2130837511;
 			
 			static Id()
 			{
@@ -98,10 +97,10 @@ namespace FluidsynthMidiServices
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
+			// aapt resource value: 0x7F030000
 			public const int Main = 2130903040;
 			
-			// aapt resource value: 0x7f030001
+			// aapt resource value: 0x7F030001
 			public const int RhythmPad = 2130903041;
 			
 			static Layout()
@@ -117,14 +116,11 @@ namespace FluidsynthMidiServices
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int app_name = 2131034114;
+			// aapt resource value: 0x7F040000
+			public const int app_name = 2130968576;
 			
-			// aapt resource value: 0x7f050001
-			public const int hello = 2131034113;
-			
-			// aapt resource value: 0x7f050000
-			public const int library_name = 2131034112;
+			// aapt resource value: 0x7F040001
+			public const int hello = 2130968577;
 			
 			static String()
 			{
@@ -139,8 +135,8 @@ namespace FluidsynthMidiServices
 		public partial class Xml
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int device_info = 2130968576;
+			// aapt resource value: 0x7F050000
+			public const int device_info = 2131034112;
 			
 			static Xml()
 			{

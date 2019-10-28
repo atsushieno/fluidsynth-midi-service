@@ -29,8 +29,8 @@ prepare-gdbserver:
 	cp $(ANDROID_NDK_PATH)/prebuilt/android-x86/gdbserver/gdbserver NFluidsynth.Android/Libs/x86/gdbserver.so
 
 hackinstall: build-native
-	xbuild
-	xbuild FluidsynthMidiServices/FluidsynthMidiServices.csproj /t:Install $(XBUILD_ARGS)
+	msbuild
+	msbuild FluidsynthMidiServices/FluidsynthMidiServices.csproj /t:Install $(XBUILD_ARGS)
 
 releaseinstall:
 	make XBUILD_ARGS=/p:Configuration=Release hackinstall

@@ -36,6 +36,10 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Commons.Music.Midi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\managed-midi.1.9.12\lib\MonoAndroid\Commons.Music.Midi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -49,10 +53,9 @@
       <Project>{83B7266D-75D2-481F-B082-0FF8E7E2EC72}</Project>
       <Name>NFluidsynth.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\external\nfluidsynth\external\managed-midi\Commons.Music.Midi.Android\Commons.Music.Midi.Android.csproj">
-      <Project>{8C6AF32A-3692-43B3-A907-9395564DB067}</Project>
-      <Name>Commons.Music.Midi.Android</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\external\nfluidsynth\NFluidsynth.MidiAccess.Shared\NFluidsynth.MidiAccess.Shared.projitems" Label="Shared" Condition="Exists('..\external\nfluidsynth\NFluidsynth.MidiAccess.Shared\NFluidsynth.MidiAccess.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

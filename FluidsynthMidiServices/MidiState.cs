@@ -143,7 +143,7 @@ namespace FluidsynthMidiServices
 			return stream;
 		}
 		
-		public override TextReader Resolve (string url)
+		protected override TextReader OnResolve (string url)
 		{
 			return new StreamReader (ResolveStream (url));
 		}

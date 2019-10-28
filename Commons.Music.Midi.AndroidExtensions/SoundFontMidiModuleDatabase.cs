@@ -16,6 +16,8 @@ namespace Commons.Music.Midi.AndroidExtensions
 			this.resolve_stream = resolveStream;
 			Modules = new List<MidiModuleDefinition> ();
 		}
+
+		public override IEnumerable<MidiModuleDefinition> All () => Modules;
 		
 		public IList<MidiModuleDefinition> Modules { get; private set; }
 		
