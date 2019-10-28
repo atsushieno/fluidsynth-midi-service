@@ -2,5 +2,6 @@ bin
 obj
 *.userprefs
 .vs
+.idea
 packages
 NFluidsynth.Android/Libs
