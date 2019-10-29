@@ -136,7 +136,7 @@ namespace FluidsynthMidiServices
 				syn.PitchBend (ch, msg [offset + 1] + msg [offset + 2] * 0x80);
 				break;
 			case 0xF0:
-				syn.Sysex (new ArraySegment<byte> (msg, offset, count).ToArray (), null);
+				syn.Sysex (msg, offset, count, null, 0, 0);
 				break;
 			}
 #endif

@@ -5,7 +5,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Android.Content.Res;
 using Android.Runtime;
-using static NFluidsynth.Native.LibFluidsynth;
 
 namespace NFluidsynth
 {
@@ -32,17 +31,17 @@ namespace NFluidsynth
 			base.Dispose ();
 		}
 
-		[DllImport ("fluidsynth", EntryPoint = "Java_fluidsynth_androidextensions_NativeHandler_setAssetManagerContext")]
+		[DllImport ("fluidsynth-assetloader", EntryPoint = "Java_fluidsynth_androidextensions_NativeHandler_setAssetManagerContext")]
 		static extern void set_asset_manager_context (IntPtr jniEnv, IntPtr __this, IntPtr assetManager);
 
-		[DllImport ("fluidsynth")]
+		[DllImport ("fluidsynth-assetloader")]
 		static extern IntPtr new_fluid_android_asset_sfloader (IntPtr settings, IntPtr nativeAssetManager);
 	}
 
 	public class AndroidAssetSoundFontLoader : SoundFontLoader
 	{
 		public AndroidAssetSoundFontLoader (Settings settings, AssetManager assetManager)
-			: base (SfLoader.new_fluid_defsfloader (settings.Handle))
+			: base (SoundFontLoader.NewDefaultSoundFontLoader(settings).Handle)
 		{
 			SetCallbacks (new AssetLoaderCallbacks (assetManager));
 		}

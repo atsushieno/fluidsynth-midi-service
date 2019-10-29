@@ -57,10 +57,6 @@ namespace FluidsynthMidiServices
 #else
 			var acc = new FluidsynthMidiAccess ();
 			this.acc = acc;
-			acc.HandleNativeError = (messageManaged, messageNative) => {
-				Android.Util.Log.Error ("FluidsynthPlayground", messageManaged + " : " + messageNative);
-				return true;
-			};
 			acc.ConfigureSettings += settings => {
 				settings [ConfigurationKeys.AudioSampleFormat].StringValue = "16bits"; // float or 16bits
 				

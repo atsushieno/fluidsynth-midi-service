@@ -52,6 +52,17 @@
       <HintPath>..\packages\mugene.1.2.5\lib\netstandard2.0\mugenelib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NFluidsynth, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\nfluidsynth.0.2.4\lib\netstandard2.0\NFluidsynth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NFluidsynth.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\NFluidsynth.Android\bin\Debug\NFluidsynth.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="NFluidsynth.MidiAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\nfluidsynth.0.2.4\lib\netstandard2.0\NFluidsynth.MidiAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -95,10 +106,6 @@
     <ProjectReference Include="..\NAudio.SoundFont.Android\NAudio.SoundFont.Android.csproj">
       <Project>{361A7415-3B9F-49A8-8EA3-97E13604566B}</Project>
       <Name>NAudio.SoundFont.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NFluidsynth.MidiAccess.Android\NFluidsynth.MidiAccess.Android.csproj">
-      <Project>{549311B4-48E4-4C8B-B41E-B71F17F1A598}</Project>
-      <Name>NFluidsynth.MidiAccess.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
